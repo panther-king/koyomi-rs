@@ -45,7 +45,7 @@ fn 西暦2024年1月の祝日を判定できる(
     #[case] expect: Option<Holiday>,
 ) {
     let c = NaiveDate::from_ymd_opt(y, m, d).unwrap();
-    let holiday = Koyomi::from_chrono(&c).holiday();
+    let holiday = Koyomi::from(&c).holiday();
 
     assert_eq!(expect, holiday);
 }
@@ -87,7 +87,7 @@ fn 西暦2024年2月の祝日を判定できる(
     #[case] expect: Option<Holiday>,
 ) {
     let c = NaiveDate::from_ymd_opt(y, m, d).unwrap();
-    let holiday = Koyomi::from_chrono(&c).holiday();
+    let holiday = Koyomi::from(&c).holiday();
 
     assert_eq!(expect, holiday);
 }
@@ -131,7 +131,7 @@ fn 西暦2024年3月の祝日を判定できる(
     #[case] expect: Option<Holiday>,
 ) {
     let c = NaiveDate::from_ymd_opt(y, m, d).unwrap();
-    let holiday = Koyomi::from_chrono(&c).holiday();
+    let holiday = Koyomi::from(&c).holiday();
 
     assert_eq!(expect, holiday);
 }
@@ -174,7 +174,7 @@ fn 西暦2024年4月の祝日を判定できる(
     #[case] expect: Option<Holiday>,
 ) {
     let c = NaiveDate::from_ymd_opt(y, m, d).unwrap();
-    let holiday = Koyomi::from_chrono(&c).holiday();
+    let holiday = Koyomi::from(&c).holiday();
 
     assert_eq!(expect, holiday);
 }
@@ -218,7 +218,7 @@ fn 西暦2024年5月の祝日を判定できる(
     #[case] expect: Option<Holiday>,
 ) {
     let c = NaiveDate::from_ymd_opt(y, m, d).unwrap();
-    let holiday = Koyomi::from_chrono(&c).holiday();
+    let holiday = Koyomi::from(&c).holiday();
 
     assert_eq!(expect, holiday);
 }
@@ -261,7 +261,7 @@ fn 西暦2024年6月の祝日を判定できる(
     #[case] expect: Option<Holiday>,
 ) {
     let c = NaiveDate::from_ymd_opt(y, m, d).unwrap();
-    let holiday = Koyomi::from_chrono(&c).holiday();
+    let holiday = Koyomi::from(&c).holiday();
 
     assert_eq!(expect, holiday);
 }
@@ -305,7 +305,7 @@ fn 西暦2024年7月の祝日を判定できる(
     #[case] expect: Option<Holiday>,
 ) {
     let c = NaiveDate::from_ymd_opt(y, m, d).unwrap();
-    let holiday = Koyomi::from_chrono(&c).holiday();
+    let holiday = Koyomi::from(&c).holiday();
 
     assert_eq!(expect, holiday);
 }
@@ -349,7 +349,7 @@ fn 西暦2024年8月の祝日を判定できる(
     #[case] expect: Option<Holiday>,
 ) {
     let c = NaiveDate::from_ymd_opt(y, m, d).unwrap();
-    let holiday = Koyomi::from_chrono(&c).holiday();
+    let holiday = Koyomi::from(&c).holiday();
 
     assert_eq!(expect, holiday);
 }
@@ -392,7 +392,7 @@ fn 西暦2024年9月の祝日を判定できる(
     #[case] expect: Option<Holiday>,
 ) {
     let c = NaiveDate::from_ymd_opt(y, m, d).unwrap();
-    let holiday = Koyomi::from_chrono(&c).holiday();
+    let holiday = Koyomi::from(&c).holiday();
 
     assert_eq!(expect, holiday);
 }
@@ -436,7 +436,7 @@ fn 西暦2024年10月の祝日を判定できる(
     #[case] expect: Option<Holiday>,
 ) {
     let c = NaiveDate::from_ymd_opt(y, m, d).unwrap();
-    let holiday = Koyomi::from_chrono(&c).holiday();
+    let holiday = Koyomi::from(&c).holiday();
 
     assert_eq!(expect, holiday);
 }
@@ -479,7 +479,7 @@ fn 西暦2024年11月の祝日を判定できる(
     #[case] expect: Option<Holiday>,
 ) {
     let c = NaiveDate::from_ymd_opt(y, m, d).unwrap();
-    let holiday = Koyomi::from_chrono(&c).holiday();
+    let holiday = Koyomi::from(&c).holiday();
 
     assert_eq!(expect, holiday);
 }
@@ -523,7 +523,7 @@ fn 西暦2024年12月の祝日を判定できる(
     #[case] expect: Option<Holiday>,
 ) {
     let c = NaiveDate::from_ymd_opt(y, m, d).unwrap();
-    let holiday = Koyomi::from_chrono(&c).holiday();
+    let holiday = Koyomi::from(&c).holiday();
 
     assert_eq!(expect, holiday);
 }

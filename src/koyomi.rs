@@ -1,5 +1,6 @@
 use self::Holiday::*;
 use chrono::{Datelike, NaiveDate};
+use std::convert::From;
 
 #[derive(Debug, Eq, PartialEq)]
 pub enum Holiday {
@@ -94,15 +95,6 @@ pub struct Koyomi {
 }
 
 impl Koyomi {
-    pub fn from_chrono(chrono: &NaiveDate) -> Koyomi {
-        Self {
-            year: chrono.year(),
-            month: chrono.month(),
-            day: chrono.day(),
-            weekday: chrono.weekday().num_days_from_monday(),
-        }
-    }
-
     pub fn autumnal_equinox_day(&self) -> Option<Holiday> {
         match self {
             Self {
@@ -468,7 +460,7 @@ impl Koyomi {
                 Self { year: y, .. } if *y <= 1973 => None,
                 _ => NaiveDate::from_ymd_opt(self.year, self.month, self.day)
                     .and_then(|c| c.pred_opt())
-                    .map(|c| Self::from_chrono(&c))
+                    .map(|c| Self::from(&c))
                     .and_then(|k| match k.holiday_without_substitute() {
                         None => None,
                         Some(_) if k.weekday == 6 => Some(SubstituteDay),
@@ -491,6 +483,17 @@ impl Koyomi {
 
     pub fn year(&self) -> i32 {
         self.year
+    }
+}
+
+impl From<&NaiveDate> for Koyomi {
+    fn from(item: &NaiveDate) -> Self {
+        Self {
+            year: item.year(),
+            month: item.month(),
+            day: item.day(),
+            weekday: item.weekday().num_days_from_monday(),
+        }
     }
 }
 
@@ -533,14 +536,14 @@ mod tests_new_years_day {
     #[rstest]
     fn 祝日法の施行後1月1日は元日である() {
         let date = NaiveDate::from_ymd_opt(1949, 1, 1).unwrap();
-        let koyomi = Koyomi::from_chrono(&date);
+        let koyomi = Koyomi::from(&date);
         assert_eq!(Some(NewYearsDay), koyomi.new_years_day());
     }
 
     #[rstest]
     fn 祝日法の施行以前は1月1日であっても元日ではない() {
         let date = NaiveDate::from_ymd_opt(1948, 1, 1).unwrap();
-        let koyomi = Koyomi::from_chrono(&date);
+        let koyomi = Koyomi::from(&date);
         assert_ne!(Some(NewYearsDay), koyomi.new_years_day());
     }
 }
@@ -554,28 +557,28 @@ mod tests_coming_of_age_day {
     #[rstest]
     fn 祝日法の施行後1月15日は成人の日である() {
         let date = NaiveDate::from_ymd_opt(1949, 1, 15).unwrap();
-        let koyomi = Koyomi::from_chrono(&date);
+        let koyomi = Koyomi::from(&date);
         assert_eq!(Some(ComingOfAgeDay), koyomi.coming_of_age_day());
     }
 
     #[rstest]
     fn 祝日法の施行以前は1月15日であっても成人の日ではない() {
         let date = NaiveDate::from_ymd_opt(1948, 1, 15).unwrap();
-        let koyomi = Koyomi::from_chrono(&date);
+        let koyomi = Koyomi::from(&date);
         assert_ne!(Some(ComingOfAgeDay), koyomi.coming_of_age_day());
     }
 
     #[rstest]
     fn 祝日法の改正後は1月の第2月曜が成人の日である() {
         let date = NaiveDate::from_ymd_opt(2000, 1, 10).unwrap();
-        let koyomi = Koyomi::from_chrono(&date);
+        let koyomi = Koyomi::from(&date);
         assert_eq!(Some(ComingOfAgeDay), koyomi.coming_of_age_day());
     }
 
     #[rstest]
     fn 祝日法の改正後は1月15日であっても第2月曜でなければ成人の日ではない() {
         let date = NaiveDate::from_ymd_opt(2000, 1, 15).unwrap();
-        let koyomi = Koyomi::from_chrono(&date);
+        let koyomi = Koyomi::from(&date);
         assert_ne!(Some(ComingOfAgeDay), koyomi.coming_of_age_day());
     }
 }
@@ -589,7 +592,7 @@ mod tests_national_foundation_day {
     #[rstest]
     fn 祝日法の改正後は2月15日が建国記念の日である() {
         let date = NaiveDate::from_ymd_opt(1967, 2, 11).unwrap();
-        let koyomi = Koyomi::from_chrono(&date);
+        let koyomi = Koyomi::from(&date);
         assert_eq!(
             Some(NationalFoundationDay),
             koyomi.national_foundation_day()
@@ -599,7 +602,7 @@ mod tests_national_foundation_day {
     #[rstest]
     fn 祝日法の改正以前は2月15日であっても建国記念の日ではない() {
         let date = NaiveDate::from_ymd_opt(1966, 2, 15).unwrap();
-        let koyomi = Koyomi::from_chrono(&date);
+        let koyomi = Koyomi::from(&date);
         assert_ne!(
             Some(NationalFoundationDay),
             koyomi.national_foundation_day()
@@ -620,7 +623,7 @@ mod tests_emperors_birthday {
         #[case] y: i32,
     ) {
         let date = NaiveDate::from_ymd_opt(y, 4, 29).unwrap();
-        let koyomi = Koyomi::from_chrono(&date);
+        let koyomi = Koyomi::from(&date);
         assert_eq!(Some(EmperorsBirthday), koyomi.emperors_birthday());
     }
 
@@ -631,7 +634,7 @@ mod tests_emperors_birthday {
         #[case] y: i32,
     ) {
         let date = NaiveDate::from_ymd_opt(y, 12, 23).unwrap();
-        let koyomi = Koyomi::from_chrono(&date);
+        let koyomi = Koyomi::from(&date);
         assert_eq!(Some(EmperorsBirthday), koyomi.emperors_birthday());
     }
 
@@ -641,14 +644,14 @@ mod tests_emperors_birthday {
         #[case] y: i32,
     ) {
         let date = NaiveDate::from_ymd_opt(y, 2, 23).unwrap();
-        let koyomi = Koyomi::from_chrono(&date);
+        let koyomi = Koyomi::from(&date);
         assert_eq!(Some(EmperorsBirthday), koyomi.emperors_birthday());
     }
 
     #[rstest]
     fn 祝日法の施行前は昭和天皇在位時の4月29日でも天皇誕生日ではない() {
         let date = NaiveDate::from_ymd_opt(1948, 4, 29).unwrap();
-        let koyomi = Koyomi::from_chrono(&date);
+        let koyomi = Koyomi::from(&date);
         assert_ne!(Some(EmperorsBirthday), koyomi.emperors_birthday());
     }
 
@@ -657,7 +660,7 @@ mod tests_emperors_birthday {
     #[case(12, 23)]
     fn 天皇退位の2019年は天皇誕生日が存在しない(#[case] m: u32, #[case] d: u32) {
         let date = NaiveDate::from_ymd_opt(2019, m, d).unwrap();
-        let koyomi = Koyomi::from_chrono(&date);
+        let koyomi = Koyomi::from(&date);
         assert_ne!(Some(EmperorsBirthday), koyomi.emperors_birthday());
     }
 }
@@ -671,14 +674,14 @@ mod vernal_equinox_day_tests {
     #[rstest]
     fn 祝日法施行後の春分日は春分の日である() {
         let date = NaiveDate::from_ymd_opt(1949, 3, 21).unwrap();
-        let koyomi = Koyomi::from_chrono(&date);
+        let koyomi = Koyomi::from(&date);
         assert_eq!(Some(VernalEquinoxDay), koyomi.vernal_equinox_day());
     }
 
     #[rstest]
     fn 祝日法施行以前は春分日であっても春分の日ではない() {
         let date = NaiveDate::from_ymd_opt(1948, 3, 21).unwrap();
-        let koyomi = Koyomi::from_chrono(&date);
+        let koyomi = Koyomi::from(&date);
         assert_ne!(Some(VernalEquinoxDay), koyomi.vernal_equinox_day());
     }
 }
@@ -696,21 +699,21 @@ mod green_days_tests {
         #[case] y: i32,
     ) {
         let date = NaiveDate::from_ymd_opt(y, 4, 29).unwrap();
-        let koyomi = Koyomi::from_chrono(&date);
+        let koyomi = Koyomi::from(&date);
         assert_eq!(Some(GreenDay), koyomi.green_day());
     }
 
     #[rstest]
     fn 昭和の日制定後は5月4日がみどりの日である() {
         let date = NaiveDate::from_ymd_opt(2007, 5, 4).unwrap();
-        let koyomi = Koyomi::from_chrono(&date);
+        let koyomi = Koyomi::from(&date);
         assert_eq!(Some(GreenDay), koyomi.green_day());
     }
 
     #[rstest]
     fn 昭和天皇在位時の4月29日はみどりの日ではない() {
         let date = NaiveDate::from_ymd_opt(1988, 4, 29).unwrap();
-        let koyomi = Koyomi::from_chrono(&date);
+        let koyomi = Koyomi::from(&date);
         assert_ne!(Some(GreenDay), koyomi.green_day());
     }
 }
@@ -724,14 +727,14 @@ mod showa_days_tests {
     #[rstest]
     fn 昭和の日が制定された2007年以降は4月29日が昭和の日である() {
         let date = NaiveDate::from_ymd_opt(2007, 4, 29).unwrap();
-        let koyomi = Koyomi::from_chrono(&date);
+        let koyomi = Koyomi::from(&date);
         assert_eq!(Some(ShowaDay), koyomi.showa_day());
     }
 
     #[rstest]
     fn 昭和の日制定以前の4月29日は昭和の日ではない() {
         let date = NaiveDate::from_ymd_opt(2006, 4, 29).unwrap();
-        let koyomi = Koyomi::from_chrono(&date);
+        let koyomi = Koyomi::from(&date);
         assert_ne!(Some(ShowaDay), koyomi.showa_day());
     }
 }
@@ -745,14 +748,14 @@ mod constitution_day_tests {
     #[rstest]
     fn 祝日法の施行後5月3日は憲法記念日である() {
         let date = NaiveDate::from_ymd_opt(1948, 5, 3).unwrap();
-        let koyomi = Koyomi::from_chrono(&date);
+        let koyomi = Koyomi::from(&date);
         assert_eq!(Some(ConstitutionDay), koyomi.constitution_day());
     }
 
     #[rstest]
     fn 祝日法施行以前の5月3日は憲法記念日ではない() {
         let date = NaiveDate::from_ymd_opt(1947, 5, 3).unwrap();
-        let koyomi = Koyomi::from_chrono(&date);
+        let koyomi = Koyomi::from(&date);
         assert_ne!(Some(ConstitutionDay), koyomi.constitution_day());
     }
 }
@@ -766,14 +769,14 @@ mod childrens_day_tests {
     #[rstest]
     fn 祝日法の施行後5月5日はこどもの日である() {
         let date = NaiveDate::from_ymd_opt(1948, 5, 5).unwrap();
-        let koyomi = Koyomi::from_chrono(&date);
+        let koyomi = Koyomi::from(&date);
         assert_eq!(Some(ChildrensDay), koyomi.childrens_day());
     }
 
     #[rstest]
     fn 祝日法施行以前の5月5日はこどもの日ではない() {
         let date = NaiveDate::from_ymd_opt(1947, 5, 5).unwrap();
-        let koyomi = Koyomi::from_chrono(&date);
+        let koyomi = Koyomi::from(&date);
         assert_ne!(Some(ChildrensDay), koyomi.childrens_day());
     }
 }
@@ -791,14 +794,14 @@ mod marin_day_tests {
         #[case] y: i32,
     ) {
         let date = NaiveDate::from_ymd_opt(y, 7, 20).unwrap();
-        let koyomi = Koyomi::from_chrono(&date);
+        let koyomi = Koyomi::from(&date);
         assert_eq!(Some(MarineDay), koyomi.marine_day());
     }
 
     #[rstest]
     fn 制定以前の7月20日は海の日ではない() {
         let date = NaiveDate::from_ymd_opt(1995, 7, 20).unwrap();
-        let koyomi = Koyomi::from_chrono(&date);
+        let koyomi = Koyomi::from(&date);
         assert_ne!(Some(MarineDay), koyomi.marine_day());
     }
 
@@ -811,28 +814,28 @@ mod marin_day_tests {
         #[case] d: u32,
     ) {
         let date = NaiveDate::from_ymd_opt(y, m, d).unwrap();
-        let koyomi = Koyomi::from_chrono(&date);
+        let koyomi = Koyomi::from(&date);
         assert_eq!(Some(MarineDay), koyomi.marine_day());
     }
 
     #[rstest]
     fn 東京五輪の特措法に基づき2020年は7月23日が海の日である() {
         let date = NaiveDate::from_ymd_opt(2020, 7, 23).unwrap();
-        let koyomi = Koyomi::from_chrono(&date);
+        let koyomi = Koyomi::from(&date);
         assert_eq!(Some(MarineDay), koyomi.marine_day());
     }
 
     #[rstest]
     fn 東京オリンピック開催年の2021年は開会式前日の7月22日が海の日である() {
         let date = NaiveDate::from_ymd_opt(2021, 7, 22).unwrap();
-        let koyomi = Koyomi::from_chrono(&date);
+        let koyomi = Koyomi::from(&date);
         assert_eq!(Some(MarineDay), koyomi.marine_day());
     }
 
     #[rstest]
     fn 東京オリンピック以降は7月の第3月曜が海の日である() {
         let date = NaiveDate::from_ymd_opt(2022, 7, 18).unwrap();
-        let koyomi = Koyomi::from_chrono(&date);
+        let koyomi = Koyomi::from(&date);
         assert_eq!(Some(MarineDay), koyomi.marine_day());
     }
 }
@@ -848,35 +851,35 @@ mod mountain_day_tests {
     #[case(2019)]
     fn 制定年の2016年から2019年まで8月11日は山の日である(#[case] y: i32) {
         let date = NaiveDate::from_ymd_opt(y, 8, 11).unwrap();
-        let koyomi = Koyomi::from_chrono(&date);
+        let koyomi = Koyomi::from(&date);
         assert_eq!(Some(MountainDay), koyomi.mountain_day());
     }
 
     #[rstest]
     fn 制定以前の8月11日は山の日ではない() {
         let date = NaiveDate::from_ymd_opt(2015, 8, 11).unwrap();
-        let koyomi = Koyomi::from_chrono(&date);
+        let koyomi = Koyomi::from(&date);
         assert_ne!(Some(MountainDay), koyomi.mountain_day());
     }
 
     #[rstest]
     fn 東京五輪の特措法に基づき2020年は8月10日が山の日である() {
         let date = NaiveDate::from_ymd_opt(2020, 8, 10).unwrap();
-        let koyomi = Koyomi::from_chrono(&date);
+        let koyomi = Koyomi::from(&date);
         assert_eq!(Some(MountainDay), koyomi.mountain_day());
     }
 
     #[rstest]
     fn 東京オリンピック開催年の2021年は閉会式翌日の8月8日が山の日である() {
         let date = NaiveDate::from_ymd_opt(2021, 8, 8).unwrap();
-        let koyomi = Koyomi::from_chrono(&date);
+        let koyomi = Koyomi::from(&date);
         assert_eq!(Some(MountainDay), koyomi.mountain_day());
     }
 
     #[rstest]
     fn 東京オリンピック以降は8月11日が山の日である() {
         let date = NaiveDate::from_ymd_opt(2022, 8, 11).unwrap();
-        let koyomi = Koyomi::from_chrono(&date);
+        let koyomi = Koyomi::from(&date);
         assert_eq!(Some(MountainDay), koyomi.mountain_day());
     }
 }
@@ -894,21 +897,21 @@ mod respect_for_the_age_day_tests {
         #[case] y: i32,
     ) {
         let date = NaiveDate::from_ymd_opt(y, 9, 15).unwrap();
-        let koyomi = Koyomi::from_chrono(&date);
+        let koyomi = Koyomi::from(&date);
         assert_eq!(Some(RespectForTheAgeDay), koyomi.respect_for_the_age_day());
     }
 
     #[rstest]
     fn 制定以前の9月15日は敬老の日ではない() {
         let date = NaiveDate::from_ymd_opt(1965, 9, 15).unwrap();
-        let koyomi = Koyomi::from_chrono(&date);
+        let koyomi = Koyomi::from(&date);
         assert_ne!(Some(RespectForTheAgeDay), koyomi.respect_for_the_age_day());
     }
 
     #[rstest]
     fn ハッピーマンデー導入後は9月の第3月曜が敬老の日である() {
         let date = NaiveDate::from_ymd_opt(2022, 9, 19).unwrap();
-        let koyomi = Koyomi::from_chrono(&date);
+        let koyomi = Koyomi::from(&date);
         assert_eq!(Some(RespectForTheAgeDay), koyomi.respect_for_the_age_day());
     }
 }
@@ -922,14 +925,14 @@ mod autumnal_equinox_day_tests {
     #[rstest]
     fn 祝日法施行後の秋分日は秋分の日である() {
         let date = NaiveDate::from_ymd_opt(1949, 9, 23).unwrap();
-        let koyomi = Koyomi::from_chrono(&date);
+        let koyomi = Koyomi::from(&date);
         assert_eq!(Some(AutumnalEquinoxDay), koyomi.autumnal_equinox_day());
     }
 
     #[rstest]
     fn 祝日法施行以前は秋分日であっても秋分の日ではない() {
         let date = NaiveDate::from_ymd_opt(1948, 9, 23).unwrap();
-        let koyomi = Koyomi::from_chrono(&date);
+        let koyomi = Koyomi::from(&date);
         assert_ne!(Some(AutumnalEquinoxDay), koyomi.autumnal_equinox_day());
     }
 }
@@ -947,21 +950,21 @@ mod physical_education_day_tests {
         #[case] y: i32,
     ) {
         let date = NaiveDate::from_ymd_opt(y, 10, 10).unwrap();
-        let koyomi = Koyomi::from_chrono(&date);
+        let koyomi = Koyomi::from(&date);
         assert_eq!(Some(PhysicalEducationDay), koyomi.physical_education_day());
     }
 
     #[rstest]
     fn 制定以前の10月10日は体育の日ではない() {
         let date = NaiveDate::from_ymd_opt(1965, 10, 10).unwrap();
-        let koyomi = Koyomi::from_chrono(&date);
+        let koyomi = Koyomi::from(&date);
         assert_ne!(Some(PhysicalEducationDay), koyomi.physical_education_day());
     }
 
     #[rstest]
     fn ハッピーマンデー導入後は10月の第2月曜が体育の日である() {
         let date = NaiveDate::from_ymd_opt(2000, 10, 9).unwrap();
-        let koyomi = Koyomi::from_chrono(&date);
+        let koyomi = Koyomi::from(&date);
         assert_eq!(Some(PhysicalEducationDay), koyomi.physical_education_day());
     }
 }
@@ -975,28 +978,28 @@ mod sports_day_tests {
     #[rstest]
     fn 東京五輪の特措法に基づき2020年は7月24日がスポーツの日である() {
         let date = NaiveDate::from_ymd_opt(2020, 7, 24).unwrap();
-        let koyomi = Koyomi::from_chrono(&date);
+        let koyomi = Koyomi::from(&date);
         assert_eq!(Some(SportsDay), koyomi.sports_day());
     }
 
     #[rstest]
     fn 東京オリンピック開催年の2021年は7月23日がスポーツの日である() {
         let date = NaiveDate::from_ymd_opt(2021, 7, 23).unwrap();
-        let koyomi = Koyomi::from_chrono(&date);
+        let koyomi = Koyomi::from(&date);
         assert_eq!(Some(SportsDay), koyomi.sports_day());
     }
 
     #[rstest]
     fn 東京オリンピック以降は10月の第2月曜がスポーツの日である() {
         let date = NaiveDate::from_ymd_opt(2022, 10, 10).unwrap();
-        let koyomi = Koyomi::from_chrono(&date);
+        let koyomi = Koyomi::from(&date);
         assert_eq!(Some(SportsDay), koyomi.sports_day());
     }
 
     #[rstest]
     fn 制定以前の10月第2月曜はスポーツの日ではない() {
         let date = NaiveDate::from_ymd_opt(2019, 10, 14).unwrap();
-        let koyomi = Koyomi::from_chrono(&date);
+        let koyomi = Koyomi::from(&date);
         assert_ne!(Some(SportsDay), koyomi.sports_day());
     }
 }
@@ -1010,14 +1013,14 @@ mod culture_day_tests {
     #[rstest]
     fn 祝日法施行後の11月3日は文化の日である() {
         let date = NaiveDate::from_ymd_opt(1948, 11, 3).unwrap();
-        let koyomi = Koyomi::from_chrono(&date);
+        let koyomi = Koyomi::from(&date);
         assert_eq!(Some(CultureDay), koyomi.culture_day());
     }
 
     #[rstest]
     fn 祝日法の施行以前は11月3日であっても文化の日ではない() {
         let date = NaiveDate::from_ymd_opt(1947, 11, 3).unwrap();
-        let koyomi = Koyomi::from_chrono(&date);
+        let koyomi = Koyomi::from(&date);
         assert_ne!(Some(CultureDay), koyomi.culture_day());
     }
 }
@@ -1031,14 +1034,14 @@ mod labor_thanksgiving_day_tests {
     #[rstest]
     fn 祝日法施行後の11月23日は勤労感謝の日である() {
         let date = NaiveDate::from_ymd_opt(1948, 11, 23).unwrap();
-        let koyomi = Koyomi::from_chrono(&date);
+        let koyomi = Koyomi::from(&date);
         assert_eq!(Some(LaborThanksgivingDay), koyomi.labor_thanksgiving_day());
     }
 
     #[rstest]
     fn 祝日法の施行以前は11月23日であっても勤労感謝の日ではない() {
         let date = NaiveDate::from_ymd_opt(1947, 11, 23).unwrap();
-        let koyomi = Koyomi::from_chrono(&date);
+        let koyomi = Koyomi::from(&date);
         assert_ne!(Some(LaborThanksgivingDay), koyomi.labor_thanksgiving_day());
     }
 }
@@ -1052,7 +1055,7 @@ mod imperial_ceremony_tests {
     #[rstest]
     fn 明仁親王の結婚の儀が行われた1959年4月10日は祝日である() {
         let date = NaiveDate::from_ymd_opt(1959, 4, 10).unwrap();
-        let koyomi = Koyomi::from_chrono(&date);
+        let koyomi = Koyomi::from(&date);
         assert_eq!(
             Some(ImperialCeremony("明仁親王の結婚の儀".to_string())),
             koyomi.imperial_ceremony()
@@ -1062,7 +1065,7 @@ mod imperial_ceremony_tests {
     #[rstest]
     fn 昭和天皇大喪の礼が行われた1989年2月24日は祝日である() {
         let date = NaiveDate::from_ymd_opt(1989, 2, 24).unwrap();
-        let koyomi = Koyomi::from_chrono(&date);
+        let koyomi = Koyomi::from(&date);
         assert_eq!(
             Some(ImperialCeremony("昭和天皇大喪の礼".to_string())),
             koyomi.imperial_ceremony()
@@ -1072,7 +1075,7 @@ mod imperial_ceremony_tests {
     #[rstest]
     fn 平成天皇の即位礼正殿の儀が行われた1990年11月12日は祝日である() {
         let date = NaiveDate::from_ymd_opt(1990, 11, 12).unwrap();
-        let koyomi = Koyomi::from_chrono(&date);
+        let koyomi = Koyomi::from(&date);
         assert_eq!(
             Some(ImperialCeremony("即位礼正殿の儀".to_string())),
             koyomi.imperial_ceremony()
@@ -1082,7 +1085,7 @@ mod imperial_ceremony_tests {
     #[rstest]
     fn 徳仁親王の結婚の儀が行われた1993年6月9日は祝日である() {
         let date = NaiveDate::from_ymd_opt(1993, 6, 9).unwrap();
-        let koyomi = Koyomi::from_chrono(&date);
+        let koyomi = Koyomi::from(&date);
         assert_eq!(
             Some(ImperialCeremony("徳仁親王の結婚の儀".to_string())),
             koyomi.imperial_ceremony()
@@ -1092,7 +1095,7 @@ mod imperial_ceremony_tests {
     #[rstest]
     fn 令和天皇が即位した2019年5月1日は祝日である() {
         let date = NaiveDate::from_ymd_opt(2019, 5, 1).unwrap();
-        let koyomi = Koyomi::from_chrono(&date);
+        let koyomi = Koyomi::from(&date);
         assert_eq!(
             Some(ImperialCeremony("令和天皇即位".to_string())),
             koyomi.imperial_ceremony()
@@ -1102,7 +1105,7 @@ mod imperial_ceremony_tests {
     #[rstest]
     fn 令和天皇の即位礼正殿の儀が行われた2019年10月22日は祝日である() {
         let date = NaiveDate::from_ymd_opt(2019, 10, 22).unwrap();
-        let koyomi = Koyomi::from_chrono(&date);
+        let koyomi = Koyomi::from(&date);
         assert_eq!(
             Some(ImperialCeremony("即位礼正殿の儀".to_string())),
             koyomi.imperial_ceremony()
@@ -1119,21 +1122,21 @@ mod substitute_holiday_tests {
     #[rstest]
     fn 日曜が祝日の場合は次の月曜が振替休日である() {
         let date = NaiveDate::from_ymd_opt(2021, 8, 9).unwrap();
-        let koyomi = Koyomi::from_chrono(&date);
+        let koyomi = Koyomi::from(&date);
         assert_eq!(Some(SubstituteDay), koyomi.substitute_holiday());
     }
 
     #[rstest]
     fn 日曜の次に祝日が連続する場合は祝日の次の平日が振替休日である() {
         let date = NaiveDate::from_ymd_opt(2020, 5, 6).unwrap();
-        let koyomi = Koyomi::from_chrono(&date);
+        let koyomi = Koyomi::from(&date);
         assert_eq!(Some(SubstituteDay), koyomi.substitute_holiday());
     }
 
     #[rstest]
     fn 祝日法の改正前は日曜が祝日であっても次の月曜は振替休日ではない() {
         let date = NaiveDate::from_ymd_opt(1973, 2, 12).unwrap();
-        let koyomi = Koyomi::from_chrono(&date);
+        let koyomi = Koyomi::from(&date);
         assert_ne!(Some(SubstituteDay), koyomi.substitute_holiday());
     }
 }
