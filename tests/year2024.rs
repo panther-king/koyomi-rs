@@ -3,18 +3,32 @@ extern crate koyomi;
 extern crate rstest;
 
 use chrono::NaiveDate;
-use koyomi::{Holiday, Koyomi};
+use koyomi::prelude::*;
 use rstest::rstest;
 
+use JapaneseHoliday::*;
+
 #[rstest]
-#[case(2024, 1, 1, Some(Holiday::NewYearsDay))]
+fn 西暦2024年はきのえたつである() {
+    let date = NaiveDate::from_ymd_opt(2024, 1, 1).unwrap();
+    assert_eq!("甲辰", SexagenaryCycle::from_datelike(&date).to_str());
+}
+
+#[rstest]
+fn 西暦2024年は辰年である() {
+    let date = NaiveDate::from_ymd_opt(2024, 1, 1).unwrap();
+    assert_eq!("辰", JapaneseZodiac::from_datelike(&date).to_str());
+}
+
+#[rstest]
+#[case(2024, 1, 1, Some(NewYearsDay))]
 #[case(2024, 1, 2, None)]
 #[case(2024, 1, 3, None)]
 #[case(2024, 1, 4, None)]
 #[case(2024, 1, 5, None)]
 #[case(2024, 1, 6, None)]
 #[case(2024, 1, 7, None)]
-#[case(2024, 1, 8, Some(Holiday::ComingOfAgeDay))]
+#[case(2024, 1, 8, Some(ComingOfAgeDay))]
 #[case(2024, 1, 9, None)]
 #[case(2024, 1, 10, None)]
 #[case(2024, 1, 11, None)]
@@ -42,12 +56,10 @@ fn 西暦2024年1月の祝日を判定できる(
     #[case] y: i32,
     #[case] m: u32,
     #[case] d: u32,
-    #[case] expect: Option<Holiday>,
+    #[case] expect: Option<JapaneseHoliday>,
 ) {
-    let c = NaiveDate::from_ymd_opt(y, m, d).unwrap();
-    let holiday = Koyomi::from(&c).holiday();
-
-    assert_eq!(expect, holiday);
+    let date = NaiveDate::from_ymd_opt(y, m, d).unwrap();
+    assert_eq!(expect, JapaneseHoliday::holiday(&date));
 }
 
 #[rstest]
@@ -61,8 +73,8 @@ fn 西暦2024年1月の祝日を判定できる(
 #[case(2024, 2, 8, None)]
 #[case(2024, 2, 9, None)]
 #[case(2024, 2, 10, None)]
-#[case(2024, 2, 11, Some(Holiday::NationalFoundationDay))]
-#[case(2024, 2, 12, Some(Holiday::SubstituteDay))]
+#[case(2024, 2, 11, Some(NationalFoundationDay))]
+#[case(2024, 2, 12, Some(SubstituteDay))]
 #[case(2024, 2, 13, None)]
 #[case(2024, 2, 14, None)]
 #[case(2024, 2, 15, None)]
@@ -73,7 +85,7 @@ fn 西暦2024年1月の祝日を判定できる(
 #[case(2024, 2, 20, None)]
 #[case(2024, 2, 21, None)]
 #[case(2024, 2, 22, None)]
-#[case(2024, 2, 23, Some(Holiday::EmperorsBirthday))]
+#[case(2024, 2, 23, Some(EmperorsBirthday))]
 #[case(2024, 2, 24, None)]
 #[case(2024, 2, 25, None)]
 #[case(2024, 2, 26, None)]
@@ -84,12 +96,10 @@ fn 西暦2024年2月の祝日を判定できる(
     #[case] y: i32,
     #[case] m: u32,
     #[case] d: u32,
-    #[case] expect: Option<Holiday>,
+    #[case] expect: Option<JapaneseHoliday>,
 ) {
-    let c = NaiveDate::from_ymd_opt(y, m, d).unwrap();
-    let holiday = Koyomi::from(&c).holiday();
-
-    assert_eq!(expect, holiday);
+    let date = NaiveDate::from_ymd_opt(y, m, d).unwrap();
+    assert_eq!(expect, JapaneseHoliday::holiday(&date));
 }
 
 #[rstest]
@@ -112,7 +122,7 @@ fn 西暦2024年2月の祝日を判定できる(
 #[case(2024, 3, 17, None)]
 #[case(2024, 3, 18, None)]
 #[case(2024, 3, 19, None)]
-#[case(2024, 3, 20, Some(Holiday::VernalEquinoxDay))]
+#[case(2024, 3, 20, Some(VernalEquinoxDay))]
 #[case(2024, 3, 21, None)]
 #[case(2024, 3, 22, None)]
 #[case(2024, 3, 23, None)]
@@ -128,12 +138,10 @@ fn 西暦2024年3月の祝日を判定できる(
     #[case] y: i32,
     #[case] m: u32,
     #[case] d: u32,
-    #[case] expect: Option<Holiday>,
+    #[case] expect: Option<JapaneseHoliday>,
 ) {
-    let c = NaiveDate::from_ymd_opt(y, m, d).unwrap();
-    let holiday = Koyomi::from(&c).holiday();
-
-    assert_eq!(expect, holiday);
+    let date = NaiveDate::from_ymd_opt(y, m, d).unwrap();
+    assert_eq!(expect, JapaneseHoliday::holiday(&date));
 }
 
 #[rstest]
@@ -165,27 +173,25 @@ fn 西暦2024年3月の祝日を判定できる(
 #[case(2024, 4, 26, None)]
 #[case(2024, 4, 27, None)]
 #[case(2024, 4, 28, None)]
-#[case(2024, 4, 29, Some(Holiday::ShowaDay))]
+#[case(2024, 4, 29, Some(ShowaDay))]
 #[case(2024, 4, 30, None)]
 fn 西暦2024年4月の祝日を判定できる(
     #[case] y: i32,
     #[case] m: u32,
     #[case] d: u32,
-    #[case] expect: Option<Holiday>,
+    #[case] expect: Option<JapaneseHoliday>,
 ) {
-    let c = NaiveDate::from_ymd_opt(y, m, d).unwrap();
-    let holiday = Koyomi::from(&c).holiday();
-
-    assert_eq!(expect, holiday);
+    let date = NaiveDate::from_ymd_opt(y, m, d).unwrap();
+    assert_eq!(expect, JapaneseHoliday::holiday(&date));
 }
 
 #[rstest]
 #[case(2024, 5, 1, None)]
 #[case(2024, 5, 2, None)]
-#[case(2024, 5, 3, Some(Holiday::ConstitutionDay))]
-#[case(2024, 5, 4, Some(Holiday::GreenDay))]
-#[case(2024, 5, 5, Some(Holiday::ChildrensDay))]
-#[case(2024, 5, 6, Some(Holiday::SubstituteDay))]
+#[case(2024, 5, 3, Some(ConstitutionDay))]
+#[case(2024, 5, 4, Some(GreenDay))]
+#[case(2024, 5, 5, Some(ChildrensDay))]
+#[case(2024, 5, 6, Some(SubstituteDay))]
 #[case(2024, 5, 7, None)]
 #[case(2024, 5, 8, None)]
 #[case(2024, 5, 9, None)]
@@ -215,12 +221,10 @@ fn 西暦2024年5月の祝日を判定できる(
     #[case] y: i32,
     #[case] m: u32,
     #[case] d: u32,
-    #[case] expect: Option<Holiday>,
+    #[case] expect: Option<JapaneseHoliday>,
 ) {
-    let c = NaiveDate::from_ymd_opt(y, m, d).unwrap();
-    let holiday = Koyomi::from(&c).holiday();
-
-    assert_eq!(expect, holiday);
+    let date = NaiveDate::from_ymd_opt(y, m, d).unwrap();
+    assert_eq!(expect, JapaneseHoliday::holiday(&date));
 }
 
 #[rstest]
@@ -258,12 +262,10 @@ fn 西暦2024年6月の祝日を判定できる(
     #[case] y: i32,
     #[case] m: u32,
     #[case] d: u32,
-    #[case] expect: Option<Holiday>,
+    #[case] expect: Option<JapaneseHoliday>,
 ) {
-    let c = NaiveDate::from_ymd_opt(y, m, d).unwrap();
-    let holiday = Koyomi::from(&c).holiday();
-
-    assert_eq!(expect, holiday);
+    let date = NaiveDate::from_ymd_opt(y, m, d).unwrap();
+    assert_eq!(expect, JapaneseHoliday::holiday(&date));
 }
 
 #[rstest]
@@ -281,7 +283,7 @@ fn 西暦2024年6月の祝日を判定できる(
 #[case(2024, 7, 12, None)]
 #[case(2024, 7, 13, None)]
 #[case(2024, 7, 14, None)]
-#[case(2024, 7, 15, Some(Holiday::MarineDay))]
+#[case(2024, 7, 15, Some(MarineDay))]
 #[case(2024, 7, 16, None)]
 #[case(2024, 7, 17, None)]
 #[case(2024, 7, 18, None)]
@@ -302,12 +304,10 @@ fn 西暦2024年7月の祝日を判定できる(
     #[case] y: i32,
     #[case] m: u32,
     #[case] d: u32,
-    #[case] expect: Option<Holiday>,
+    #[case] expect: Option<JapaneseHoliday>,
 ) {
-    let c = NaiveDate::from_ymd_opt(y, m, d).unwrap();
-    let holiday = Koyomi::from(&c).holiday();
-
-    assert_eq!(expect, holiday);
+    let date = NaiveDate::from_ymd_opt(y, m, d).unwrap();
+    assert_eq!(expect, JapaneseHoliday::holiday(&date));
 }
 
 #[rstest]
@@ -321,8 +321,8 @@ fn 西暦2024年7月の祝日を判定できる(
 #[case(2024, 8, 8, None)]
 #[case(2024, 8, 9, None)]
 #[case(2024, 8, 10, None)]
-#[case(2024, 8, 11, Some(Holiday::MountainDay))]
-#[case(2024, 8, 12, Some(Holiday::SubstituteDay))]
+#[case(2024, 8, 11, Some(MountainDay))]
+#[case(2024, 8, 12, Some(SubstituteDay))]
 #[case(2024, 8, 13, None)]
 #[case(2024, 8, 14, None)]
 #[case(2024, 8, 15, None)]
@@ -346,12 +346,10 @@ fn 西暦2024年8月の祝日を判定できる(
     #[case] y: i32,
     #[case] m: u32,
     #[case] d: u32,
-    #[case] expect: Option<Holiday>,
+    #[case] expect: Option<JapaneseHoliday>,
 ) {
-    let c = NaiveDate::from_ymd_opt(y, m, d).unwrap();
-    let holiday = Koyomi::from(&c).holiday();
-
-    assert_eq!(expect, holiday);
+    let date = NaiveDate::from_ymd_opt(y, m, d).unwrap();
+    assert_eq!(expect, JapaneseHoliday::holiday(&date));
 }
 
 #[rstest]
@@ -370,14 +368,14 @@ fn 西暦2024年8月の祝日を判定できる(
 #[case(2024, 9, 13, None)]
 #[case(2024, 9, 14, None)]
 #[case(2024, 9, 15, None)]
-#[case(2024, 9, 16, Some(Holiday::RespectForTheAgeDay))]
+#[case(2024, 9, 16, Some(RespectForTheAgeDay))]
 #[case(2024, 9, 17, None)]
 #[case(2024, 9, 18, None)]
 #[case(2024, 9, 19, None)]
 #[case(2024, 9, 20, None)]
 #[case(2024, 9, 21, None)]
-#[case(2024, 9, 22, Some(Holiday::AutumnalEquinoxDay))]
-#[case(2024, 9, 23, Some(Holiday::SubstituteDay))]
+#[case(2024, 9, 22, Some(AutumnalEquinoxDay))]
+#[case(2024, 9, 23, Some(SubstituteDay))]
 #[case(2024, 9, 24, None)]
 #[case(2024, 9, 25, None)]
 #[case(2024, 9, 26, None)]
@@ -389,12 +387,10 @@ fn 西暦2024年9月の祝日を判定できる(
     #[case] y: i32,
     #[case] m: u32,
     #[case] d: u32,
-    #[case] expect: Option<Holiday>,
+    #[case] expect: Option<JapaneseHoliday>,
 ) {
-    let c = NaiveDate::from_ymd_opt(y, m, d).unwrap();
-    let holiday = Koyomi::from(&c).holiday();
-
-    assert_eq!(expect, holiday);
+    let date = NaiveDate::from_ymd_opt(y, m, d).unwrap();
+    assert_eq!(expect, JapaneseHoliday::holiday(&date));
 }
 
 #[rstest]
@@ -411,7 +407,7 @@ fn 西暦2024年9月の祝日を判定できる(
 #[case(2024, 10, 11, None)]
 #[case(2024, 10, 12, None)]
 #[case(2024, 10, 13, None)]
-#[case(2024, 10, 14, Some(Holiday::SportsDay))]
+#[case(2024, 10, 14, Some(SportsDay))]
 #[case(2024, 10, 15, None)]
 #[case(2024, 10, 16, None)]
 #[case(2024, 10, 17, None)]
@@ -433,19 +429,17 @@ fn 西暦2024年10月の祝日を判定できる(
     #[case] y: i32,
     #[case] m: u32,
     #[case] d: u32,
-    #[case] expect: Option<Holiday>,
+    #[case] expect: Option<JapaneseHoliday>,
 ) {
-    let c = NaiveDate::from_ymd_opt(y, m, d).unwrap();
-    let holiday = Koyomi::from(&c).holiday();
-
-    assert_eq!(expect, holiday);
+    let date = NaiveDate::from_ymd_opt(y, m, d).unwrap();
+    assert_eq!(expect, JapaneseHoliday::holiday(&date));
 }
 
 #[rstest]
 #[case(2024, 11, 1, None)]
 #[case(2024, 11, 2, None)]
-#[case(2024, 11, 3, Some(Holiday::CultureDay))]
-#[case(2024, 11, 4, Some(Holiday::SubstituteDay))]
+#[case(2024, 11, 3, Some(CultureDay))]
+#[case(2024, 11, 4, Some(SubstituteDay))]
 #[case(2024, 11, 5, None)]
 #[case(2024, 11, 6, None)]
 #[case(2024, 11, 7, None)]
@@ -464,7 +458,7 @@ fn 西暦2024年10月の祝日を判定できる(
 #[case(2024, 11, 20, None)]
 #[case(2024, 11, 21, None)]
 #[case(2024, 11, 22, None)]
-#[case(2024, 11, 23, Some(Holiday::LaborThanksgivingDay))]
+#[case(2024, 11, 23, Some(LaborThanksgivingDay))]
 #[case(2024, 11, 24, None)]
 #[case(2024, 11, 25, None)]
 #[case(2024, 11, 26, None)]
@@ -476,12 +470,10 @@ fn 西暦2024年11月の祝日を判定できる(
     #[case] y: i32,
     #[case] m: u32,
     #[case] d: u32,
-    #[case] expect: Option<Holiday>,
+    #[case] expect: Option<JapaneseHoliday>,
 ) {
-    let c = NaiveDate::from_ymd_opt(y, m, d).unwrap();
-    let holiday = Koyomi::from(&c).holiday();
-
-    assert_eq!(expect, holiday);
+    let date = NaiveDate::from_ymd_opt(y, m, d).unwrap();
+    assert_eq!(expect, JapaneseHoliday::holiday(&date));
 }
 
 #[rstest]
@@ -520,10 +512,8 @@ fn 西暦2024年12月の祝日を判定できる(
     #[case] y: i32,
     #[case] m: u32,
     #[case] d: u32,
-    #[case] expect: Option<Holiday>,
+    #[case] expect: Option<JapaneseHoliday>,
 ) {
-    let c = NaiveDate::from_ymd_opt(y, m, d).unwrap();
-    let holiday = Koyomi::from(&c).holiday();
-
-    assert_eq!(expect, holiday);
+    let date = NaiveDate::from_ymd_opt(y, m, d).unwrap();
+    assert_eq!(expect, JapaneseHoliday::holiday(&date));
 }
