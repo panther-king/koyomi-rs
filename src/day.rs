@@ -4,7 +4,7 @@ use chrono::{Datelike, NaiveDate, Weekday};
 use self::JapaneseHoliday::*;
 use self::JapaneseWeekday::*;
 
-#[derive(Debug, Eq, PartialEq)]
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
 pub enum JapaneseHoliday {
     /// 秋分の日
     AutumnalEquinoxDay,
@@ -504,7 +504,7 @@ impl JapaneseHoliday {
     }
 }
 
-#[derive(Debug, Eq, Ord, PartialEq, PartialOrd)]
+#[derive(Clone, Copy, Debug, Eq, Ord, PartialEq, PartialOrd)]
 pub enum JapaneseWeekday {
     /// 月
     Getsu,

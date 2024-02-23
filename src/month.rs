@@ -3,7 +3,7 @@ use chrono::Datelike;
 
 use self::JapaneseMonth::*;
 
-#[derive(Clone, Debug, Eq, Ord, PartialEq, PartialOrd)]
+#[derive(Clone, Copy, Debug, Eq, Ord, PartialEq, PartialOrd)]
 pub enum JapaneseMonth {
     /// 睦月
     Mutsuki,

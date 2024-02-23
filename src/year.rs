@@ -5,7 +5,7 @@ use self::HeavenlyStem::*;
 use self::JapaneseZodiac::*;
 use self::SexagenaryCycle::*;
 
-#[derive(Clone, Debug, Eq, Ord, PartialEq, PartialOrd)]
+#[derive(Clone, Copy, Debug, Eq, Ord, PartialEq, PartialOrd)]
 pub enum HeavenlyStem {
     /// 甲
     Kinoe,
@@ -157,7 +157,7 @@ impl HeavenlyStem {
     }
 }
 
-#[derive(Clone, Debug, Eq, Ord, PartialEq, PartialOrd)]
+#[derive(Clone, Copy, Debug, Eq, Ord, PartialEq, PartialOrd)]
 pub enum JapaneseZodiac {
     /// 子
     Ne,
@@ -289,7 +289,7 @@ impl JapaneseZodiac {
     }
 }
 
-#[derive(Debug, Eq, Ord, PartialEq, PartialOrd)]
+#[derive(Clone, Copy, Debug, Eq, Ord, PartialEq, PartialOrd)]
 pub enum SexagenaryCycle {
     /// 甲子
     KinoeNe,

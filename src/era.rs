@@ -3,7 +3,7 @@ use chrono::Datelike;
 
 use self::JapaneseEra::*;
 
-#[derive(Clone, Debug, Eq, Ord, PartialEq, PartialOrd)]
+#[derive(Clone, Copy, Debug, Eq, Ord, PartialEq, PartialOrd)]
 pub enum JapaneseEra {
     /// 令和
     Reiwa(u8),
