@@ -1,4 +1,4 @@
-use crate::internal::{InnerDate, HEAVENLY_STEMS, JAPANESE_ZODIAC, SEXAGENARY_CYCLE};
+use crate::internal::{InternalDate, HEAVENLY_STEMS, JAPANESE_ZODIAC, SEXAGENARY_CYCLE};
 use chrono::Datelike;
 
 use self::HeavenlyStem::*;
@@ -42,7 +42,7 @@ impl HeavenlyStem {
     /// assert_eq!(HeavenlyStem::Kinoe, HeavenlyStem::from_datelike(&date));
     /// ```
     pub fn from_datelike<T: Datelike>(date: &T) -> Self {
-        let current = InnerDate {
+        let current = InternalDate {
             year: date.year(),
             month: date.month(),
             day: date.day(),

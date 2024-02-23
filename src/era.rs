@@ -1,4 +1,4 @@
-use crate::internal::InnerDate;
+use crate::internal::InternalDate;
 use chrono::Datelike;
 
 use self::JapaneseEra::*;
@@ -31,7 +31,7 @@ impl JapaneseEra {
     /// assert_eq!(JapaneseEra::Reiwa(6), JapaneseEra::from_datelike(&date).unwrap());
     /// ```
     pub fn from_datelike<T: Datelike>(date: &T) -> Option<Self> {
-        let current = InnerDate {
+        let current = InternalDate {
             year: date.year(),
             month: date.month(),
             day: date.day(),
@@ -64,13 +64,13 @@ impl JapaneseEra {
         }
     }
 
-    fn heisei(date: &InnerDate) -> Option<Self> {
-        let begin = InnerDate {
+    fn heisei(date: &InternalDate) -> Option<Self> {
+        let begin = InternalDate {
             year: 1989,
             month: 1,
             day: 8,
         };
-        let until = InnerDate {
+        let until = InternalDate {
             year: 2019,
             month: 4,
             day: 30,
@@ -90,13 +90,13 @@ impl JapaneseEra {
         }
     }
 
-    fn meiji(date: &InnerDate) -> Option<Self> {
-        let begin = InnerDate {
+    fn meiji(date: &InternalDate) -> Option<Self> {
+        let begin = InternalDate {
             year: 1868,
             month: 10,
             day: 23,
         };
-        let until = InnerDate {
+        let until = InternalDate {
             year: 1912,
             month: 7,
             day: 29,
@@ -111,8 +111,8 @@ impl JapaneseEra {
         }
     }
 
-    fn reiwa(date: &InnerDate) -> Option<Self> {
-        let begin = InnerDate {
+    fn reiwa(date: &InternalDate) -> Option<Self> {
+        let begin = InternalDate {
             year: 2019,
             month: 5,
             day: 1,
@@ -127,13 +127,13 @@ impl JapaneseEra {
         }
     }
 
-    fn showa(date: &InnerDate) -> Option<Self> {
-        let begin = InnerDate {
+    fn showa(date: &InternalDate) -> Option<Self> {
+        let begin = InternalDate {
             year: 1926,
             month: 12,
             day: 25,
         };
-        let until = InnerDate {
+        let until = InternalDate {
             year: 1989,
             month: 1,
             day: 7,
@@ -148,13 +148,13 @@ impl JapaneseEra {
         }
     }
 
-    fn taisho(date: &InnerDate) -> Option<Self> {
-        let begin = InnerDate {
+    fn taisho(date: &InternalDate) -> Option<Self> {
+        let begin = InternalDate {
             year: 1912,
             month: 7,
             day: 30,
         };
-        let until = InnerDate {
+        let until = InternalDate {
             year: 1926,
             month: 12,
             day: 24,

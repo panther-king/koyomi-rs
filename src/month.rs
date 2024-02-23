@@ -1,4 +1,4 @@
-use crate::internal::{InnerDate, JAPANESE_MONTHS};
+use crate::internal::{InternalDate, JAPANESE_MONTHS};
 use chrono::Datelike;
 
 use self::JapaneseMonth::*;
@@ -44,7 +44,7 @@ impl JapaneseMonth {
     /// assert_eq!(JapaneseMonth::Mutsuki, JapaneseMonth::from_datelike(&date));
     /// ```
     pub fn from_datelike<T: Datelike>(date: &T) -> Self {
-        let current = InnerDate {
+        let current = InternalDate {
             year: date.year(),
             month: date.month(),
             day: date.day(),

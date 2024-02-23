@@ -31,7 +31,7 @@ pub(crate) const SEXAGENARY_CYCLE: [&str; 60] = [
 ];
 
 #[derive(Debug, Eq, Ord, PartialEq, PartialOrd)]
-pub(crate) struct InnerDate {
+pub(crate) struct InternalDate {
     pub year: i32,
     pub month: u32,
     pub day: u32,
