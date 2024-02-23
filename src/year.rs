@@ -1,4 +1,4 @@
-use crate::inner::{InnerDate, HEAVENLY_STEMS, JAPANESE_ZODIAC, SEXAGENARY_CYCLE};
+use crate::internal::{InnerDate, HEAVENLY_STEMS, JAPANESE_ZODIAC, SEXAGENARY_CYCLE};
 use chrono::Datelike;
 
 use self::HeavenlyStem::*;

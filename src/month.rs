@@ -1,4 +1,4 @@
-use crate::inner::{InnerDate, JAPANESE_MONTHS};
+use crate::internal::{InnerDate, JAPANESE_MONTHS};
 use chrono::Datelike;
 
 use self::JapaneseMonth::*;

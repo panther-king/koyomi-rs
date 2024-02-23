@@ -1,6 +1,6 @@
 mod day;
 mod era;
-mod inner;
+mod internal;
 mod month;
 mod year;
 

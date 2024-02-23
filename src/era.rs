@@ -1,4 +1,4 @@
-use crate::inner::InnerDate;
+use crate::internal::InnerDate;
 use chrono::Datelike;
 
 use self::JapaneseEra::*;

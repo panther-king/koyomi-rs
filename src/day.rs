@@ -1,4 +1,4 @@
-use crate::inner::JAPANESE_WEEKDAY;
+use crate::internal::JAPANESE_WEEKDAY;
 use chrono::{Datelike, NaiveDate, Weekday};
 
 use self::JapaneseHoliday::*;
