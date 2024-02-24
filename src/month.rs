@@ -105,7 +105,7 @@ impl JapaneseMonth {
     ///
     /// assert_eq!("弥生", JapaneseMonth::Yayoi.to_str());
     /// ```
-    pub const fn to_str(&self) -> &str {
+    pub const fn to_str(&self) -> &'static str {
         JAPANESE_MONTHS[self.to_usize() - 1]
     }
 

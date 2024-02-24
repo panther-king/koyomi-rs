@@ -435,7 +435,7 @@ impl JapaneseHoliday {
     /// let holiday = JapaneseHoliday::NewYearsDay;
     /// assert_eq!("元日", holiday.to_str());
     /// ```
-    pub const fn to_str(&self) -> &str {
+    pub const fn to_str(&self) -> &'static str {
         match self {
             AutumnalEquinoxDay => "秋分の日",
             ChildrensDay => "こどもの日",
@@ -587,7 +587,7 @@ impl JapaneseWeekday {
     ///
     /// assert_eq!("水", JapaneseWeekday::Sui.to_str());
     /// ```
-    pub const fn to_str(&self) -> &str {
+    pub const fn to_str(&self) -> &'static str {
         JAPANESE_WEEKDAY[self.to_usize() - 1]
     }
 

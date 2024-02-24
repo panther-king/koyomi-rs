@@ -128,7 +128,7 @@ impl HeavenlyStem {
     ///
     /// assert_eq!("甲", HeavenlyStem::Kinoe.to_str());
     /// ```
-    pub const fn to_str(&self) -> &str {
+    pub const fn to_str(&self) -> &'static str {
         HEAVENLY_STEMS[self.to_usize() - 1]
     }
 
@@ -258,7 +258,7 @@ impl JapaneseZodiac {
     ///
     /// assert_eq!("丑", JapaneseZodiac::Ushi.to_str());
     /// ```
-    pub const fn to_str(&self) -> &str {
+    pub const fn to_str(&self) -> &'static str {
         JAPANESE_ZODIAC[self.to_usize() - 1]
     }
 
@@ -458,7 +458,7 @@ impl SexagenaryCycle {
     ///
     /// assert_eq!("戊辰", SexagenaryCycle::TsuchinoeTatsu.to_str());
     /// ```
-    pub const fn to_str(&self) -> &str {
+    pub const fn to_str(&self) -> &'static str {
         SEXAGENARY_CYCLE[self.to_usize() - 1]
     }
 

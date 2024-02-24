@@ -54,7 +54,7 @@ impl JapaneseEra {
     ///
     /// assert_eq!("令和", JapaneseEra::Reiwa(1).to_str());
     /// ```
-    pub const fn to_str(&self) -> &str {
+    pub const fn to_str(&self) -> &'static str {
         match self {
             Reiwa(_) => "令和",
             Heisei(_) => "平成",
