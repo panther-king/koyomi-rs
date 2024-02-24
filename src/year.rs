@@ -1,4 +1,4 @@
-use crate::internal::{InternalDate, HEAVENLY_STEMS, JAPANESE_ZODIAC, SEXAGENARY_CYCLE};
+use crate::internal::{HEAVENLY_STEMS, JAPANESE_ZODIAC, SEXAGENARY_CYCLE};
 use chrono::Datelike;
 
 use self::HeavenlyStem::*;
@@ -42,39 +42,13 @@ impl HeavenlyStem {
     /// assert_eq!(HeavenlyStem::Kinoe, HeavenlyStem::from_datelike(&date));
     /// ```
     pub fn from_datelike<T: Datelike>(date: &T) -> Self {
-        let current = InternalDate {
-            year: date.year(),
-            month: date.month(),
-            day: date.day(),
+        // @refs https://spicomi.net/media/articles/1360
+        let index = match (date.year() + 7) % 10 {
+            0 => 10,
+            n => n.abs(),
         };
 
-        // @refs http://tadopika.net/fate/tendaycount.html
-        let year = if current.year % 2 == 0 { 0 } else { 5 };
-        let month = match current.month {
-            2 | 6 | 7 => 0,
-            8 => 1,
-            9 | 10 => 2,
-            11 | 12 => 3,
-            3 => 8,
-            1 | 4 | 5 => 9,
-            _ => unreachable!(),
-        };
-        let day = current.day as i32;
-        let leap4 = match current.month {
-            1 | 2 => (current.year - 1) / 4,
-            3..=12 => current.year / 4,
-            _ => unreachable!(),
-        };
-        let leap100 = match current.month {
-            1 | 2 => (current.year - 1) / 100,
-            3..=12 => current.year / 100,
-            _ => unreachable!(),
-        };
-        let leap400 = leap4 / 100;
-        let total = (year + leap4 - leap100 + leap400 + month + day) as usize;
-        let index = total % 10;
-
-        HeavenlyStem::from_usize(index + 1).unwrap()
+        HeavenlyStem::from_usize(index as usize).unwrap()
     }
 
     /// Generate from string.
@@ -198,11 +172,13 @@ impl JapaneseZodiac {
     /// assert_eq!(JapaneseZodiac::Tatsu, JapaneseZodiac::from_datelike(&date));
     /// ```
     pub fn from_datelike<T: Datelike>(date: &T) -> Self {
-        // @refs https://kanshiqsei.com/ad-year-change-jyunishi-of-year
-        match (date.year() + 9) % 12 {
-            0 => JapaneseZodiac::from_usize(12).unwrap(),
-            n => JapaneseZodiac::from_usize(n as usize).unwrap(),
-        }
+        // @refs https://spicomi.net/media/articles/1360
+        let index = match (date.year() + 9) % 12 {
+            0 => 12,
+            n => n.abs(),
+        };
+
+        JapaneseZodiac::from_usize(index as usize).unwrap()
     }
 
     /// Generate from string.
@@ -604,8 +580,8 @@ mod tests_heavenly_stem {
 
     #[rstest]
     fn 年月日から変換できる() {
-        let date = NaiveDate::from_ymd_opt(2012, 1, 1).unwrap();
-        assert_eq!(HeavenlyStem::Kanoto, HeavenlyStem::from_datelike(&date));
+        let date = NaiveDate::from_ymd_opt(2024, 1, 1).unwrap();
+        assert_eq!(HeavenlyStem::Kinoe, HeavenlyStem::from_datelike(&date));
     }
 
     #[rstest]
