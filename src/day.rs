@@ -285,6 +285,45 @@ impl JapaneseHoliday {
         }
     }
 
+    /// Returns the name of Japanese holiday.
+    ///
+    /// # Example
+    ///
+    /// ```rust
+    /// use koyomi::JapaneseHoliday;
+    ///
+    /// let holiday = JapaneseHoliday::NewYearsDay;
+    /// assert_eq!("元日", holiday.name());
+    /// ```
+    pub const fn name(&self) -> &'static str {
+        match self {
+            AutumnalEquinoxDay => "秋分の日",
+            ChildrensDay => "こどもの日",
+            ComingOfAgeDay => "成人の日",
+            ConstitutionDay => "憲法記念日",
+            CultureDay => "文化の日",
+            EmperorsBirthday => "天皇誕生日",
+            EnthronmentCeremonyOfEmperorHeisei => "即位礼正殿の儀",
+            EnthronmentCeremonyOfEmperorReiwa => "即位礼正殿の儀",
+            EnthronmentOfEmperorReiwa => "天皇即位",
+            GreenDay => "みどりの日",
+            LaborThanksgivingDay => "勤労感謝の日",
+            MarineDay => "海の日",
+            MountainDay => "山の日",
+            MouringCeremonyOfEmperorShowa => "昭和天皇大喪の礼",
+            NationalFoundationDay => "建国記念の日",
+            NewYearsDay => "元日",
+            PhysicalEducationDay => "体育の日",
+            RespectForTheAgeDay => "敬老の日",
+            ShowaDay => "昭和の日",
+            SportsDay => "スポーツの日",
+            SubstituteDay => "振替休日",
+            VernalEquinoxDay => "春分の日",
+            WeddingCeremonyOfPrinceAkihito => "明仁親王の結婚の儀",
+            WeddingCeremonyOfPrinceNaruhito => "徳仁親王の結婚の儀",
+        }
+    }
+
     /// [建国記念の日](https://ja.wikipedia.org/wiki/建国記念の日)
     ///
     /// # Example
@@ -425,45 +464,6 @@ impl JapaneseHoliday {
         }
     }
 
-    /// Returns the holiday name.
-    ///
-    /// # Example
-    ///
-    /// ```rust
-    /// use koyomi::JapaneseHoliday;
-    ///
-    /// let holiday = JapaneseHoliday::NewYearsDay;
-    /// assert_eq!("元日", holiday.to_str());
-    /// ```
-    pub const fn to_str(&self) -> &'static str {
-        match self {
-            AutumnalEquinoxDay => "秋分の日",
-            ChildrensDay => "こどもの日",
-            ComingOfAgeDay => "成人の日",
-            ConstitutionDay => "憲法記念日",
-            CultureDay => "文化の日",
-            EmperorsBirthday => "天皇誕生日",
-            EnthronmentCeremonyOfEmperorHeisei => "即位礼正殿の儀",
-            EnthronmentCeremonyOfEmperorReiwa => "即位礼正殿の儀",
-            EnthronmentOfEmperorReiwa => "天皇即位",
-            GreenDay => "みどりの日",
-            LaborThanksgivingDay => "勤労感謝の日",
-            MarineDay => "海の日",
-            MountainDay => "山の日",
-            MouringCeremonyOfEmperorShowa => "昭和天皇大喪の礼",
-            NationalFoundationDay => "建国記念の日",
-            NewYearsDay => "元日",
-            PhysicalEducationDay => "体育の日",
-            RespectForTheAgeDay => "敬老の日",
-            ShowaDay => "昭和の日",
-            SportsDay => "スポーツの日",
-            SubstituteDay => "振替休日",
-            VernalEquinoxDay => "春分の日",
-            WeddingCeremonyOfPrinceAkihito => "明仁親王の結婚の儀",
-            WeddingCeremonyOfPrinceNaruhito => "徳仁親王の結婚の儀",
-        }
-    }
-
     /// [春分の日](https://ja.wikipedia.org/wiki/春分の日)
     ///
     /// # Example
@@ -536,37 +536,37 @@ impl JapaneseWeekday {
     /// ```
     pub fn from_datelike<T: Datelike>(date: &T) -> Self {
         let index = date.weekday().number_from_monday();
-        JapaneseWeekday::from_usize(index as usize).unwrap()
+        JapaneseWeekday::from_number(index as usize).unwrap()
     }
 
-    /// Generate from string.
+    /// Generate from name of Japanese weekday.
     ///
     /// # Example
     ///
     /// ```rust
     /// use koyomi::JapaneseWeekday;
     ///
-    /// assert!(JapaneseWeekday::from_str("金").is_some());
+    /// assert!(JapaneseWeekday::from_name("金").is_some());
     /// ```
-    pub fn from_str(name: &str) -> Option<Self> {
+    pub fn from_name(name: &str) -> Option<Self> {
         JAPANESE_WEEKDAY
             .iter()
             .position(|&w| w == name)
-            .and_then(|i| JapaneseWeekday::from_usize(i + 1))
+            .and_then(|i| JapaneseWeekday::from_number(i + 1))
     }
 
-    /// Generate from unsigned integer.
-    /// The index starts from `1`.
+    /// Generate from number of weekday.
+    /// The index starts from `1` and first is Monday.
     ///
     /// # Example
     ///
     /// ```rust
     /// use koyomi::JapaneseWeekday;
     ///
-    /// assert!(JapaneseWeekday::from_usize(7).is_some());
+    /// assert!(JapaneseWeekday::from_number(7).is_some());
     /// ```
-    pub const fn from_usize(num: usize) -> Option<Self> {
-        match num {
+    pub const fn from_number(number: usize) -> Option<Self> {
+        match number {
             1 => Some(Getsu),
             2 => Some(Ka),
             3 => Some(Sui),
@@ -578,29 +578,30 @@ impl JapaneseWeekday {
         }
     }
 
-    /// Convert to string.
+    /// Returns the name of Japanese weekday.
     ///
     /// # Example
     ///
     /// ```rust
     /// use koyomi::JapaneseWeekday;
     ///
-    /// assert_eq!("水", JapaneseWeekday::Sui.to_str());
+    /// assert_eq!("水", JapaneseWeekday::Sui.name());
     /// ```
-    pub const fn to_str(&self) -> &'static str {
-        JAPANESE_WEEKDAY[self.to_usize() - 1]
+    pub const fn name(&self) -> &'static str {
+        JAPANESE_WEEKDAY[self.number() - 1]
     }
 
-    /// Convert to unsigned integer.
+    /// Returns the number of weekday.
+    /// The index starts from `1` and first is Monday.
     ///
     /// # Example
     ///
     /// ```rust
     /// use koyomi::JapaneseWeekday;
     ///
-    /// assert_eq!(4, JapaneseWeekday::Moku.to_usize());
+    /// assert_eq!(4, JapaneseWeekday::Moku.number());
     /// ```
-    pub const fn to_usize(&self) -> usize {
+    pub const fn number(&self) -> usize {
         match self {
             Getsu => 1,
             Ka => 2,
@@ -1315,16 +1316,16 @@ mod japanese_weekday_tests {
     #[case("金", Kin)]
     #[case("土", Do)]
     #[case("日", Nichi)]
-    fn 曜日の文字列から変換できる(
+    fn 曜日名から変換できる(
         #[case] name: &str,
         #[case] expect: JapaneseWeekday,
     ) {
-        assert_eq!(Some(expect), JapaneseWeekday::from_str(name));
+        assert_eq!(Some(expect), JapaneseWeekday::from_name(name));
     }
 
     #[rstest]
-    fn 曜日の文字列でなければ変換できない() {
-        assert!(JapaneseWeekday::from_str("").is_none());
+    fn 曜日名でなければ変換できない() {
+        assert!(JapaneseWeekday::from_name("").is_none());
     }
 
     #[rstest]
@@ -1335,13 +1336,13 @@ mod japanese_weekday_tests {
     #[case(5, Kin)]
     #[case(6, Do)]
     #[case(7, Nichi)]
-    fn 曜日の順番から変換できる(#[case] num: usize, #[case] expect: JapaneseWeekday) {
-        assert_eq!(Some(expect), JapaneseWeekday::from_usize(num));
+    fn 曜日の番号から変換できる(#[case] number: usize, #[case] expect: JapaneseWeekday) {
+        assert_eq!(Some(expect), JapaneseWeekday::from_number(number));
     }
 
     #[rstest]
-    fn 曜日の順番範囲内でなければ変換できない() {
-        assert!(JapaneseWeekday::from_usize(0).is_none());
+    fn 曜日の番号でなければ変換できない() {
+        assert!(JapaneseWeekday::from_number(0).is_none());
     }
 
     #[rstest]
@@ -1352,11 +1353,11 @@ mod japanese_weekday_tests {
     #[case(Kin, "金")]
     #[case(Do, "土")]
     #[case(Nichi, "日")]
-    fn 曜日の文字列に変換できる(
+    fn 曜日名に変換できる(
         #[case] weekday: JapaneseWeekday,
         #[case] expect: &str,
     ) {
-        assert_eq!(expect, weekday.to_str());
+        assert_eq!(expect, weekday.name());
     }
 
     #[rstest]
@@ -1367,7 +1368,7 @@ mod japanese_weekday_tests {
     #[case(Kin, 5)]
     #[case(Do, 6)]
     #[case(Nichi, 7)]
-    fn 曜日の順番に変換できる(#[case] weekday: JapaneseWeekday, #[case] expect: usize) {
-        assert_eq!(expect, weekday.to_usize());
+    fn 曜日の番号に変換できる(#[case] weekday: JapaneseWeekday, #[case] expect: usize) {
+        assert_eq!(expect, weekday.number());
     }
 }
