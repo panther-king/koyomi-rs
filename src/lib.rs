@@ -1,17 +1,24 @@
 mod day;
-mod era;
-mod internal;
-mod month;
-mod year;
-
 pub use day::{JapaneseHoliday, JapaneseWeekday};
+
+mod era;
 pub use era::JapaneseEra;
+
+mod internal;
+
+mod koyomi;
+pub use koyomi::{JapaneseDate, Koyomi};
+
+mod month;
 pub use month::JapaneseMonth;
+
+mod year;
 pub use year::{HeavenlyStem, JapaneseZodiac, SexagenaryCycle};
 
 pub mod prelude {
-    pub use crate::JapaneseEra;
-    pub use crate::JapaneseMonth;
-    pub use crate::{HeavenlyStem, JapaneseZodiac, SexagenaryCycle};
-    pub use crate::{JapaneseHoliday, JapaneseWeekday};
+    pub use crate::day::{JapaneseHoliday, JapaneseWeekday};
+    pub use crate::era::JapaneseEra;
+    pub use crate::koyomi::{JapaneseDate, Koyomi};
+    pub use crate::month::JapaneseMonth;
+    pub use crate::year::{HeavenlyStem, JapaneseZodiac, SexagenaryCycle};
 }
