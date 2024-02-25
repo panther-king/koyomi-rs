@@ -1,6 +1,18 @@
-pub(crate) const HEAVENLY_STEMS: [&str; 10] =
-    ["甲", "乙", "丙", "丁", "戊", "己", "庚", "辛", "壬", "癸"];
+#[rustfmt::skip]
+pub(crate) const HEAVENLY_STEMS: [&str; 10] = [
+    "甲",
+    "乙",
+    "丙",
+    "丁",
+    "戊",
+    "己",
+    "庚",
+    "辛",
+    "壬",
+    "癸"
+];
 
+#[rustfmt::skip]
 pub(crate) const JAPANESE_MONTHS: [&str; 12] = [
     "睦月",
     "如月",
@@ -16,12 +28,34 @@ pub(crate) const JAPANESE_MONTHS: [&str; 12] = [
     "師走",
 ];
 
-pub(crate) const JAPANESE_WEEKDAY: [&str; 7] = ["月", "火", "水", "木", "金", "土", "日"];
-
-pub(crate) const JAPANESE_ZODIAC: [&str; 12] = [
-    "子", "丑", "寅", "卯", "辰", "巳", "午", "未", "申", "酉", "戌", "亥",
+#[rustfmt::skip]
+pub(crate) const JAPANESE_WEEKDAY: [&str; 7] = [
+    "月",
+    "火",
+    "水",
+    "木",
+    "金",
+    "土",
+    "日"
 ];
 
+#[rustfmt::skip]
+pub(crate) const JAPANESE_ZODIAC: [&str; 12] = [
+    "子",
+    "丑",
+    "寅",
+    "卯",
+    "辰",
+    "巳",
+    "午",
+    "未",
+    "申",
+    "酉",
+    "戌",
+    "亥",
+];
+
+#[rustfmt::skip]
 pub(crate) const SEXAGENARY_CYCLE: [&str; 60] = [
     "甲子", "乙丑", "丙寅", "丁卯", "戊辰", "己巳", "庚午", "辛未", "壬申", "癸酉", "甲戌", "乙亥",
     "丙子", "丁丑", "戊寅", "己卯", "庚辰", "辛巳", "壬午", "癸未", "甲申", "乙酉", "丙戌", "丁亥",
