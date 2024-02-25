@@ -102,7 +102,7 @@ impl JapaneseDate {
         self.holiday.is_some()
     }
 
-    /// Returns the era name.
+    /// Returns the name of Japanese era.
     /// Note: Supported Reiwa, Heisei, Showa, Taisho and Meiji.
     ///
     /// # Example
@@ -137,7 +137,7 @@ impl JapaneseDate {
         self.heavenly_stem
     }
 
-    /// Returns the heavenly stem name.
+    /// Returns the name of heavenly stem.
     ///
     /// # Example
     ///
@@ -171,7 +171,7 @@ impl JapaneseDate {
         self.holiday
     }
 
-    /// Returns the Japanese holiday name.
+    /// Returns the name of Japanese holiday.
     ///
     /// # Example
     ///
@@ -205,7 +205,7 @@ impl JapaneseDate {
         self.month
     }
 
-    /// Returns the Japanese month name.
+    /// Returns the name of Japanese month.
     ///
     /// # Example
     ///
@@ -256,7 +256,7 @@ impl JapaneseDate {
         self.sexagenary_cycle
     }
 
-    /// Returns the sexagenary cycle name.
+    /// Returns the name of sexagenary cycle.
     ///
     /// # Example
     ///
@@ -290,7 +290,7 @@ impl JapaneseDate {
         self.weekday
     }
 
-    /// Returns the Japanese weekday name.
+    /// Returns the name of Japanese weekday.
     ///
     /// # Example
     ///
@@ -341,7 +341,7 @@ impl JapaneseDate {
         self.zodiac
     }
 
-    /// Returns the Japanese zodiac name.
+    /// Returns the name of Japanese zodiac.
     ///
     /// # Example
     ///
