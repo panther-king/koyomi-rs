@@ -50,36 +50,36 @@ impl JapaneseMonth {
             day: date.day(),
         };
 
-        JapaneseMonth::from_usize(current.month as usize).unwrap()
+        JapaneseMonth::from_number(current.month as usize).unwrap()
     }
 
-    /// Generate from string.
+    /// Generate from name of Japanese month.
     ///
     /// # Example
     ///
     /// ```rust
     /// use koyomi::JapaneseMonth;
     ///
-    /// assert!(JapaneseMonth::from_str("師走").is_some());
+    /// assert!(JapaneseMonth::from_name("師走").is_some());
     /// ```
-    pub fn from_str(name: &str) -> Option<Self> {
+    pub fn from_name(name: &str) -> Option<Self> {
         JAPANESE_MONTHS
             .iter()
             .position(|&x| x == name)
-            .and_then(|i| JapaneseMonth::from_usize(i + 1))
+            .and_then(|i| JapaneseMonth::from_number(i + 1))
     }
 
-    /// Generate from unsigned integer.
+    /// Generate from number of month.
     ///
     /// # Example
     ///
     /// ```rust
     /// use koyomi::JapaneseMonth;
     ///
-    /// assert!(JapaneseMonth::from_usize(1).is_some());
+    /// assert!(JapaneseMonth::from_number(1).is_some());
     /// ```
-    pub const fn from_usize(num: usize) -> Option<Self> {
-        match num {
+    pub const fn from_number(number: usize) -> Option<Self> {
+        match number {
             1 => Some(Mutsuki),
             2 => Some(Kisaragi),
             3 => Some(Yayoi),
@@ -96,29 +96,29 @@ impl JapaneseMonth {
         }
     }
 
-    /// Convert to string.
+    /// Returns the name of Japanese month.
     ///
     /// # Example
     ///
     /// ```rust
     /// use koyomi::JapaneseMonth;
     ///
-    /// assert_eq!("弥生", JapaneseMonth::Yayoi.to_str());
+    /// assert_eq!("弥生", JapaneseMonth::Yayoi.name());
     /// ```
-    pub const fn to_str(&self) -> &'static str {
-        JAPANESE_MONTHS[self.to_usize() - 1]
+    pub const fn name(&self) -> &'static str {
+        JAPANESE_MONTHS[self.number() - 1]
     }
 
-    /// Convert to unsigned integer.
+    /// Returns the number of month.
     ///
     /// # Example
     ///
     /// ```rust
     /// use koyomi::JapaneseMonth;
     ///
-    /// assert_eq!(10, JapaneseMonth::Kannazuki.to_usize());
+    /// assert_eq!(10, JapaneseMonth::Kannazuki.number());
     /// ```
-    pub const fn to_usize(&self) -> usize {
+    pub const fn number(&self) -> usize {
         match self {
             Mutsuki => 1,
             Kisaragi => 2,
@@ -163,13 +163,13 @@ mod tests_japanese_month {
     #[case("神無月", Kannazuki)]
     #[case("霜月", Shimotsuki)]
     #[case("師走", Shiwasu)]
-    fn 月の文字から変換できる(#[case] name: &str, #[case] expect: JapaneseMonth) {
-        assert_eq!(Some(expect), JapaneseMonth::from_str(name));
+    fn 月の名前から変換できる(#[case] name: &str, #[case] expect: JapaneseMonth) {
+        assert_eq!(Some(expect), JapaneseMonth::from_name(name));
     }
 
     #[rstest]
-    fn 月の文字でなければ変換できない() {
-        assert!(JapaneseMonth::from_str("").is_none());
+    fn 月の名前でなければ変換できない() {
+        assert!(JapaneseMonth::from_name("").is_none());
     }
 
     #[rstest]
@@ -185,13 +185,13 @@ mod tests_japanese_month {
     #[case(10, Kannazuki)]
     #[case(11, Shimotsuki)]
     #[case(12, Shiwasu)]
-    fn 月の数字から変換できる(#[case] num: usize, #[case] expect: JapaneseMonth) {
-        assert_eq!(Some(expect), JapaneseMonth::from_usize(num));
+    fn 月番号から変換できる(#[case] num: usize, #[case] expect: JapaneseMonth) {
+        assert_eq!(Some(expect), JapaneseMonth::from_number(num));
     }
 
     #[rstest]
-    fn 月の数字でなければ変換できない() {
-        assert!(JapaneseMonth::from_usize(0).is_none());
+    fn 月番号でなければ変換できない() {
+        assert!(JapaneseMonth::from_number(0).is_none());
     }
 
     #[rstest]
@@ -207,8 +207,8 @@ mod tests_japanese_month {
     #[case(Kannazuki, "神無月")]
     #[case(Shimotsuki, "霜月")]
     #[case(Shiwasu, "師走")]
-    fn 月の文字に変換できる(#[case] month: JapaneseMonth, #[case] expect: &str) {
-        assert_eq!(expect, month.to_str());
+    fn 月名に変換できる(#[case] month: JapaneseMonth, #[case] expect: &str) {
+        assert_eq!(expect, month.name());
     }
 
     #[rstest]
@@ -224,7 +224,7 @@ mod tests_japanese_month {
     #[case(Kannazuki, 10)]
     #[case(Shimotsuki, 11)]
     #[case(Shiwasu, 12)]
-    fn 月の数字に変換できる(#[case] month: JapaneseMonth, #[case] expect: usize) {
-        assert_eq!(expect, month.to_usize());
+    fn 月番号に変換できる(#[case] month: JapaneseMonth, #[case] expect: usize) {
+        assert_eq!(expect, month.number());
     }
 }

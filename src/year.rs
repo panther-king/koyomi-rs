@@ -48,26 +48,26 @@ impl HeavenlyStem {
             n => n.abs(),
         };
 
-        HeavenlyStem::from_usize(index as usize).unwrap()
+        HeavenlyStem::from_number(index as usize).unwrap()
     }
 
-    /// Generate from string.
+    /// Generate from name of heavenly stem.
     ///
     /// # Example
     ///
     /// ```rust
     /// use koyomi::HeavenlyStem;
     ///
-    /// assert!(HeavenlyStem::from_str("甲").is_some());
+    /// assert!(HeavenlyStem::from_name("甲").is_some());
     /// ```
-    pub fn from_str(name: &str) -> Option<Self> {
+    pub fn from_name(name: &str) -> Option<Self> {
         HEAVENLY_STEMS
             .iter()
             .position(|&x| x == name)
-            .and_then(|i| HeavenlyStem::from_usize(i + 1))
+            .and_then(|i| HeavenlyStem::from_number(i + 1))
     }
 
-    /// Generate from unsigned integer.
+    /// Generate from number of heavenly stem.
     /// The index starts from `1`.
     ///
     /// # Example
@@ -75,9 +75,9 @@ impl HeavenlyStem {
     /// ```rust
     /// use koyomi::HeavenlyStem;
     ///
-    /// assert!(HeavenlyStem::from_usize(1).is_some());
+    /// assert!(HeavenlyStem::from_number(1).is_some());
     /// ```
-    pub const fn from_usize(num: usize) -> Option<Self> {
+    pub const fn from_number(num: usize) -> Option<Self> {
         match num {
             1 => Some(Kinoe),
             2 => Some(Kinoto),
@@ -93,29 +93,29 @@ impl HeavenlyStem {
         }
     }
 
-    /// Convert to string.
+    /// Returns the name of heavenly stem.
     ///
     /// # Example
     ///
     /// ```rust
     /// use koyomi::HeavenlyStem;
     ///
-    /// assert_eq!("甲", HeavenlyStem::Kinoe.to_str());
+    /// assert_eq!("甲", HeavenlyStem::Kinoe.name());
     /// ```
-    pub const fn to_str(&self) -> &'static str {
-        HEAVENLY_STEMS[self.to_usize() - 1]
+    pub const fn name(&self) -> &'static str {
+        HEAVENLY_STEMS[self.to_number() - 1]
     }
 
-    /// Convert to unsigned integer.
+    /// Returns the number of heavenly stem.
     ///
     /// # Example
     ///
     /// ```rust
     /// use koyomi::HeavenlyStem;
     ///
-    /// assert_eq!(10, HeavenlyStem::Mizunoto.to_usize());
+    /// assert_eq!(10, HeavenlyStem::Mizunoto.to_number());
     /// ```
-    pub const fn to_usize(&self) -> usize {
+    pub const fn to_number(&self) -> usize {
         match self {
             Kinoe => 1,
             Kinoto => 2,
@@ -178,26 +178,26 @@ impl JapaneseZodiac {
             n => n.abs(),
         };
 
-        JapaneseZodiac::from_usize(index as usize).unwrap()
+        JapaneseZodiac::from_number(index as usize).unwrap()
     }
 
-    /// Generate from string.
+    /// Generate from name of Japanese zodiac.
     ///
     /// # Example
     ///
     /// ```rust
     /// use koyomi::JapaneseZodiac;
     ///
-    /// assert!(JapaneseZodiac::from_str("寅").is_some());
+    /// assert!(JapaneseZodiac::from_name("寅").is_some());
     /// ```
-    pub fn from_str(name: &str) -> Option<Self> {
+    pub fn from_name(name: &str) -> Option<Self> {
         JAPANESE_ZODIAC
             .iter()
             .position(|&x| x == name)
-            .and_then(|i| JapaneseZodiac::from_usize(i + 1))
+            .and_then(|i| JapaneseZodiac::from_number(i + 1))
     }
 
-    /// Generate from unsigned integer.
+    /// Generate from number of Japanese zodiac.
     /// The index starts from `1`.
     ///
     /// # Example
@@ -205,10 +205,10 @@ impl JapaneseZodiac {
     /// ```rust
     /// use koyomi::JapaneseZodiac;
     ///
-    /// assert!(JapaneseZodiac::from_usize(1).is_some());
+    /// assert!(JapaneseZodiac::from_number(1).is_some());
     /// ```
-    pub const fn from_usize(num: usize) -> Option<Self> {
-        match num {
+    pub const fn from_number(number: usize) -> Option<Self> {
+        match number {
             1 => Some(Ne),
             2 => Some(Ushi),
             3 => Some(Tora),
@@ -225,29 +225,30 @@ impl JapaneseZodiac {
         }
     }
 
-    /// Convert to string.
+    /// Returns the name of Japanese zodiac.
     ///
     /// # Example
     ///
     /// ```rust
     /// use koyomi::JapaneseZodiac;
     ///
-    /// assert_eq!("丑", JapaneseZodiac::Ushi.to_str());
+    /// assert_eq!("丑", JapaneseZodiac::Ushi.name());
     /// ```
-    pub const fn to_str(&self) -> &'static str {
-        JAPANESE_ZODIAC[self.to_usize() - 1]
+    pub const fn name(&self) -> &'static str {
+        JAPANESE_ZODIAC[self.number() - 1]
     }
 
-    /// Convert to unsigned integer.
+    /// Returns the number of Japanese zodiac.
+    /// The index starts from `1`.
     ///
     /// # Example
     ///
     /// ```rust
     /// use koyomi::JapaneseZodiac;
     ///
-    /// assert_eq!(12, JapaneseZodiac::Yi.to_usize());
+    /// assert_eq!(12, JapaneseZodiac::Yi.number());
     /// ```
-    pub const fn to_usize(&self) -> usize {
+    pub const fn number(&self) -> usize {
         match self {
             Ne => 1,
             Ushi => 2,
@@ -404,42 +405,42 @@ impl SexagenaryCycle {
     pub fn from_datelike<T: Datelike>(date: &T) -> Self {
         let hs = HeavenlyStem::from_datelike(date);
         let jz = JapaneseZodiac::from_datelike(date);
-        let sc = format!("{}{}", hs.to_str(), jz.to_str());
+        let sc = format!("{}{}", hs.name(), jz.name());
 
-        SexagenaryCycle::from_str(&sc).unwrap()
+        SexagenaryCycle::from_name(&sc).unwrap()
     }
 
-    /// Generate from string.
+    /// Generate from name of sexagenary cycle.
     ///
     /// # Example
     ///
     /// ```rust
     /// use koyomi::SexagenaryCycle;
     ///
-    /// assert!(SexagenaryCycle::from_str("丙午").is_some());
+    /// assert!(SexagenaryCycle::from_name("丙午").is_some());
     /// ```
-    pub fn from_str(name: &str) -> Option<Self> {
+    pub fn from_name(name: &str) -> Option<Self> {
         SEXAGENARY_CYCLE
             .iter()
             .position(|&x| x == name)
-            .and_then(|i| SexagenaryCycle::from_usize(i + 1))
+            .and_then(|i| SexagenaryCycle::from_number(i + 1))
     }
 
-    /// Convert to string.
+    /// Returns the name of sexagenary cycle.
     ///
     /// # Example
     ///
     /// ```rust
     /// use koyomi::SexagenaryCycle;
     ///
-    /// assert_eq!("戊辰", SexagenaryCycle::TsuchinoeTatsu.to_str());
+    /// assert_eq!("戊辰", SexagenaryCycle::TsuchinoeTatsu.name());
     /// ```
-    pub const fn to_str(&self) -> &'static str {
-        SEXAGENARY_CYCLE[self.to_usize() - 1]
+    pub const fn name(&self) -> &'static str {
+        SEXAGENARY_CYCLE[self.number() - 1]
     }
 
-    const fn from_usize(num: usize) -> Option<Self> {
-        match num {
+    const fn from_number(number: usize) -> Option<Self> {
+        match number {
             1 => Some(KinoeNe),
             2 => Some(KinotoUshi),
             3 => Some(HinoeTora),
@@ -504,7 +505,7 @@ impl SexagenaryCycle {
         }
     }
 
-    const fn to_usize(&self) -> usize {
+    const fn number(&self) -> usize {
         match self {
             KinoeNe => 1,
             KinotoUshi => 2,
@@ -595,13 +596,13 @@ mod tests_heavenly_stem {
     #[case("辛", Kanoto)]
     #[case("壬", Mizunoe)]
     #[case("癸", Mizunoto)]
-    fn 十干の文字から変換できる(#[case] name: &str, #[case] expect: HeavenlyStem) {
-        assert_eq!(Some(expect), HeavenlyStem::from_str(&name));
+    fn 十干の名前から変換できる(#[case] name: &str, #[case] expect: HeavenlyStem) {
+        assert_eq!(Some(expect), HeavenlyStem::from_name(&name));
     }
 
     #[rstest]
-    fn 十干の文字でなければ変換できない() {
-        assert!(HeavenlyStem::from_str("").is_none());
+    fn 十干の名前でなければ変換できない() {
+        assert!(HeavenlyStem::from_name("").is_none());
     }
 
     #[rstest]
@@ -615,13 +616,13 @@ mod tests_heavenly_stem {
     #[case(8, Kanoto)]
     #[case(9, Mizunoe)]
     #[case(10, Mizunoto)]
-    fn 十干の順番から変換できる(#[case] num: usize, #[case] expect: HeavenlyStem) {
-        assert_eq!(Some(expect), HeavenlyStem::from_usize(num));
+    fn 十干の番号から変換できる(#[case] number: usize, #[case] expect: HeavenlyStem) {
+        assert_eq!(Some(expect), HeavenlyStem::from_number(number));
     }
 
     #[rstest]
-    fn 十干の順番範囲内でなければ変換できない() {
-        assert!(HeavenlyStem::from_usize(11).is_none());
+    fn 十干の番号でなければ変換できない() {
+        assert!(HeavenlyStem::from_number(11).is_none());
     }
 
     #[rstest]
@@ -635,8 +636,8 @@ mod tests_heavenly_stem {
     #[case(Kanoto, "辛")]
     #[case(Mizunoe, "壬")]
     #[case(Mizunoto, "癸")]
-    fn 十干の文字に変換できる(#[case] stem: HeavenlyStem, #[case] expect: &str) {
-        assert_eq!(expect, stem.to_str());
+    fn 十干の名前に変換できる(#[case] stem: HeavenlyStem, #[case] expect: &str) {
+        assert_eq!(expect, stem.name());
     }
 
     #[rstest]
@@ -650,8 +651,8 @@ mod tests_heavenly_stem {
     #[case(Kanoto, 8)]
     #[case(Mizunoe, 9)]
     #[case(Mizunoto, 10)]
-    fn 十干の順番に変換できる(#[case] stem: HeavenlyStem, #[case] expect: usize) {
-        assert_eq!(expect, stem.to_usize());
+    fn 十干の番号に変換できる(#[case] stem: HeavenlyStem, #[case] expect: usize) {
+        assert_eq!(expect, stem.to_number());
     }
 }
 
@@ -694,13 +695,13 @@ mod tests_japanese_zodiac {
     #[case("酉", Tori)]
     #[case("戌", Inu)]
     #[case("亥", Yi)]
-    fn 十二支の文字から変換できる(#[case] name: &str, #[case] expect: JapaneseZodiac) {
-        assert_eq!(Some(expect), JapaneseZodiac::from_str(name));
+    fn 十二支の名前から変換できる(#[case] name: &str, #[case] expect: JapaneseZodiac) {
+        assert_eq!(Some(expect), JapaneseZodiac::from_name(name));
     }
 
     #[rstest]
-    fn 十二支の文字でなければ変換できない() {
-        assert!(JapaneseZodiac::from_str("").is_none());
+    fn 十二支の名前でなければ変換できない() {
+        assert!(JapaneseZodiac::from_name("").is_none());
     }
 
     #[rstest]
@@ -716,13 +717,13 @@ mod tests_japanese_zodiac {
     #[case(10, Tori)]
     #[case(11, Inu)]
     #[case(12, Yi)]
-    fn 十二支の順番から変換できる(#[case] num: usize, #[case] expect: JapaneseZodiac) {
-        assert_eq!(Some(expect), JapaneseZodiac::from_usize(num));
+    fn 十二支の番号から変換できる(#[case] number: usize, #[case] expect: JapaneseZodiac) {
+        assert_eq!(Some(expect), JapaneseZodiac::from_number(number));
     }
 
     #[rstest]
-    fn 十二支の順番範囲内でなければ変換できない() {
-        assert!(JapaneseZodiac::from_usize(13).is_none());
+    fn 十二支の番号でなければ変換できない() {
+        assert!(JapaneseZodiac::from_number(13).is_none());
     }
 
     #[rstest]
@@ -738,8 +739,8 @@ mod tests_japanese_zodiac {
     #[case(Tori, "酉")]
     #[case(Inu, "戌")]
     #[case(Yi, "亥")]
-    fn 十二支の文字に変換できる(#[case] zodiac: JapaneseZodiac, #[case] expect: &str) {
-        assert_eq!(expect, zodiac.to_str());
+    fn 十二支の名前に変換できる(#[case] zodiac: JapaneseZodiac, #[case] expect: &str) {
+        assert_eq!(expect, zodiac.name());
     }
 
     #[rstest]
@@ -755,8 +756,8 @@ mod tests_japanese_zodiac {
     #[case(Tori, 10)]
     #[case(Inu, 11)]
     #[case(Yi, 12)]
-    fn 十二支の順番に変換できる(#[case] zodiac: JapaneseZodiac, #[case] expect: usize) {
-        assert_eq!(expect, zodiac.to_usize());
+    fn 十二支の番号に変換できる(#[case] zodiac: JapaneseZodiac, #[case] expect: usize) {
+        assert_eq!(expect, zodiac.number());
     }
 }
 
@@ -838,16 +839,16 @@ mod tests_sexagenary_cycle {
     #[case("辛酉", KanotoTori)]
     #[case("壬戌", MizunoeInu)]
     #[case("癸亥", MizunotoYi)]
-    fn 六十干支の文字から変換できる(
+    fn 六十干支の名前から変換できる(
         #[case] name: &str,
         #[case] expect: SexagenaryCycle,
     ) {
-        assert_eq!(Some(expect), SexagenaryCycle::from_str(&name));
+        assert_eq!(Some(expect), SexagenaryCycle::from_name(&name));
     }
 
     #[rstest]
-    fn 六十干支の文字でなければ変換できない() {
-        assert!(SexagenaryCycle::from_str("").is_none());
+    fn 六十干支の名前でなければ変換できない() {
+        assert!(SexagenaryCycle::from_name("").is_none());
     }
 
     #[rstest]
@@ -911,10 +912,10 @@ mod tests_sexagenary_cycle {
     #[case(KanotoTori, "辛酉")]
     #[case(MizunoeInu, "壬戌")]
     #[case(MizunotoYi, "癸亥")]
-    fn 六十干支の文字に変換できる(
+    fn 六十干支の名前に変換できる(
         #[case] cycle: SexagenaryCycle,
         #[case] expect: &str,
     ) {
-        assert_eq!(expect, cycle.to_str());
+        assert_eq!(expect, cycle.name());
     }
 }

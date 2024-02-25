@@ -44,7 +44,7 @@ impl JapaneseEra {
             .or(JapaneseEra::meiji(&current))
     }
 
-    /// Convert to string.
+    /// Returns the name of Japanese era.
     /// The era year will be ignored.
     ///
     /// # Example
@@ -52,9 +52,9 @@ impl JapaneseEra {
     /// ```rust
     /// use koyomi::JapaneseEra;
     ///
-    /// assert_eq!("令和", JapaneseEra::Reiwa(1).to_str());
+    /// assert_eq!("令和", JapaneseEra::Reiwa(1).name());
     /// ```
-    pub const fn to_str(&self) -> &'static str {
+    pub const fn name(&self) -> &'static str {
         match self {
             Reiwa(_) => "令和",
             Heisei(_) => "平成",

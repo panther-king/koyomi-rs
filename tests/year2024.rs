@@ -11,13 +11,13 @@ use JapaneseHoliday::*;
 #[rstest]
 fn 西暦2024年はきのえたつである() {
     let date = NaiveDate::from_ymd_opt(2024, 1, 1).unwrap();
-    assert_eq!("甲辰", SexagenaryCycle::from_datelike(&date).to_str());
+    assert_eq!("甲辰", SexagenaryCycle::from_datelike(&date).name());
 }
 
 #[rstest]
 fn 西暦2024年は辰年である() {
     let date = NaiveDate::from_ymd_opt(2024, 1, 1).unwrap();
-    assert_eq!("辰", JapaneseZodiac::from_datelike(&date).to_str());
+    assert_eq!("辰", JapaneseZodiac::from_datelike(&date).name());
 }
 
 #[rstest]

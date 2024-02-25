@@ -117,7 +117,7 @@ impl JapaneseDate {
     /// assert_eq!("令和", japanese_date.era_name().unwrap());
     /// ```
     pub fn era_name(&self) -> Option<&'static str> {
-        self.era.map(|e| e.to_str())
+        self.era.map(|e| e.name())
     }
 
     /// Returns the `HeavenlyStem`.
@@ -151,7 +151,7 @@ impl JapaneseDate {
     /// assert_eq!("甲", japanese_date.heavenly_stem_name());
     /// ```
     pub const fn heavenly_stem_name(&self) -> &'static str {
-        self.heavenly_stem.to_str()
+        self.heavenly_stem.name()
     }
 
     /// Returns the `JapaneseHoliday`.
@@ -185,7 +185,7 @@ impl JapaneseDate {
     /// assert_eq!("元日", japanese_date.holiday_name().unwrap());
     /// ```
     pub fn holiday_name(&self) -> Option<&'static str> {
-        self.holiday.map(|h| h.to_str())
+        self.holiday.map(|h| h.name())
     }
 
     /// Returns the `JapaneseMonth`.
@@ -219,7 +219,7 @@ impl JapaneseDate {
     /// assert_eq!("如月", japanese_date.month_name());
     /// ```
     pub const fn month_name(&self) -> &'static str {
-        self.month.to_str()
+        self.month.name()
     }
 
     /// Returns the month number between 1 and 12.
@@ -270,7 +270,7 @@ impl JapaneseDate {
     /// assert_eq!("甲辰", japanese_date.sexagenary_cycle_name());
     /// ```
     pub const fn sexagenary_cycle_name(&self) -> &'static str {
-        self.sexagenary_cycle.to_str()
+        self.sexagenary_cycle.name()
     }
 
     /// Returns the `JapaneseWeekday`.
@@ -304,7 +304,7 @@ impl JapaneseDate {
     /// assert_eq!("月", japanese_date.weekday_name());
     /// ```
     pub const fn weekday_name(&self) -> &'static str {
-        self.weekday.to_str()
+        self.weekday.name()
     }
 
     /// Returns the western year.
@@ -355,7 +355,7 @@ impl JapaneseDate {
     /// assert_eq!("辰", japanese_date.zodiac_name());
     /// ```
     pub const fn zodiac_name(&self) -> &'static str {
-        self.zodiac.to_str()
+        self.zodiac.name()
     }
 }
 
