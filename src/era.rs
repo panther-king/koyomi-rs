@@ -3,6 +3,12 @@ use chrono::Datelike;
 
 use self::JapaneseEra::*;
 
+/// Japanese era.
+///
+/// It derives the Japanese era names.
+///
+/// Please note that it is not possible to derive Japanese eras before the Meiji era.
+/// Prior to the Meiji era, the derivation is based on the lunar calendar, which is not currently supported.
 #[derive(Clone, Copy, Debug, Eq, Ord, PartialEq, PartialOrd)]
 pub enum JapaneseEra {
     /// 令和

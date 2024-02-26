@@ -5,6 +5,12 @@ use self::HeavenlyStem::*;
 use self::JapaneseZodiac::*;
 use self::SexagenaryCycle::*;
 
+/// Heavenly stem.
+///
+/// It derives the heavenly stem in Japan.
+///
+/// You can convert between the order of the heavenly stem,
+/// noting that it starts from `1` (not from `0`).
 #[derive(Clone, Copy, Debug, Eq, Ord, PartialEq, PartialOrd)]
 pub enum HeavenlyStem {
     /// 甲
@@ -131,6 +137,12 @@ impl HeavenlyStem {
     }
 }
 
+/// Japanese zodiac
+///
+/// It derives the Japanese zodiac signs.
+///
+/// You can convert between the order of the Japanese zodiac,
+/// noting that it starts from `1` (not from `0`).
 #[derive(Clone, Copy, Debug, Eq, Ord, PartialEq, PartialOrd)]
 pub enum JapaneseZodiac {
     /// 子
@@ -266,6 +278,12 @@ impl JapaneseZodiac {
     }
 }
 
+/// Sexagenary cycle
+///
+/// It derives the sexagenary cycle combinations.
+///
+/// You can convert between the order of the sexagenary cycle,
+/// noting that it starts from `1` (not from `0`).
 #[derive(Clone, Copy, Debug, Eq, Ord, PartialEq, PartialOrd)]
 pub enum SexagenaryCycle {
     /// 甲子

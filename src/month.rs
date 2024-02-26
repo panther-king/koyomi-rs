@@ -3,6 +3,12 @@ use chrono::Datelike;
 
 use self::JapaneseMonth::*;
 
+/// Japanese Months.
+///
+/// It derives the names of the months in Japanese.
+///
+/// In English, we express months as January, February, etc.,
+/// but in Japanese, there are unique names for the months as well.
 #[derive(Clone, Copy, Debug, Eq, Ord, PartialEq, PartialOrd)]
 pub enum JapaneseMonth {
     /// 睦月

@@ -7,6 +7,11 @@ use crate::year::{HeavenlyStem, JapaneseZodiac, SexagenaryCycle};
 
 use chrono::{Datelike, Local, Months, NaiveDate};
 
+/// Japanese date
+///
+/// It includes dates with Japanese-specific definitions as well.
+/// You can generate it independently, but it's also intended to be used as a [`Koyomi`] item.
+#[derive(Debug, Eq, PartialEq)]
 pub struct JapaneseDate {
     day: u32,
     era: Option<JapaneseEra>,
@@ -359,6 +364,10 @@ impl JapaneseDate {
     }
 }
 
+/// Japanese calendar
+///
+/// A calendar that includes Japanese-specific definitions ([`JapaneseDate`]).
+#[derive(Debug)]
 pub struct Koyomi {
     current: NaiveDate,
     until: NaiveDate,

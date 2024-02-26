@@ -4,6 +4,10 @@ use chrono::{Datelike, NaiveDate, Weekday};
 use self::JapaneseHoliday::*;
 use self::JapaneseWeekday::*;
 
+/// Japanese specific holidays.
+///
+/// It calculated and determines holidays based on the law enacted in 1948.
+/// And also supports the Happy Monday System and substitute holidays.
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
 pub enum JapaneseHoliday {
     /// 秋分の日
@@ -504,6 +508,15 @@ impl JapaneseHoliday {
     }
 }
 
+/// Japanese weekdays.
+///
+/// It derives the names of the days of the week in Japanese.
+///
+/// In English, we express days of the weeks as Monday, Tuesday, etc..,
+/// but in Japanese, there are unique names for the days of the week as well.
+///
+/// You can convert between the order of weekdays,
+/// nothing that Monday is represented as `1` and Sunday as `7`.
 #[derive(Clone, Copy, Debug, Eq, Ord, PartialEq, PartialOrd)]
 pub enum JapaneseWeekday {
     /// 月
