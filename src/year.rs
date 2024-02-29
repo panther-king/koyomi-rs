@@ -735,7 +735,10 @@ mod tests_japanese_zodiac {
     #[case(10, Tori)]
     #[case(11, Inu)]
     #[case(12, Yi)]
-    fn 十二支の番号から変換できる(#[case] number: usize, #[case] expect: JapaneseZodiac) {
+    fn 十二支の番号から変換できる(
+        #[case] number: usize,
+        #[case] expect: JapaneseZodiac,
+    ) {
         assert_eq!(Some(expect), JapaneseZodiac::from_number(number));
     }
 

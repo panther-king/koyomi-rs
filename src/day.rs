@@ -1329,10 +1329,7 @@ mod japanese_weekday_tests {
     #[case("金", Kin)]
     #[case("土", Do)]
     #[case("日", Nichi)]
-    fn 曜日名から変換できる(
-        #[case] name: &str,
-        #[case] expect: JapaneseWeekday,
-    ) {
+    fn 曜日名から変換できる(#[case] name: &str, #[case] expect: JapaneseWeekday) {
         assert_eq!(Some(expect), JapaneseWeekday::from_name(name));
     }
 
@@ -1349,7 +1346,10 @@ mod japanese_weekday_tests {
     #[case(5, Kin)]
     #[case(6, Do)]
     #[case(7, Nichi)]
-    fn 曜日の番号から変換できる(#[case] number: usize, #[case] expect: JapaneseWeekday) {
+    fn 曜日の番号から変換できる(
+        #[case] number: usize,
+        #[case] expect: JapaneseWeekday,
+    ) {
         assert_eq!(Some(expect), JapaneseWeekday::from_number(number));
     }
 
@@ -1366,10 +1366,7 @@ mod japanese_weekday_tests {
     #[case(Kin, "金")]
     #[case(Do, "土")]
     #[case(Nichi, "日")]
-    fn 曜日名に変換できる(
-        #[case] weekday: JapaneseWeekday,
-        #[case] expect: &str,
-    ) {
+    fn 曜日名に変換できる(#[case] weekday: JapaneseWeekday, #[case] expect: &str) {
         assert_eq!(expect, weekday.name());
     }
 
