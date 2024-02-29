@@ -1,9 +1,9 @@
 extern crate chrono;
-extern crate koyomi;
+extern crate koyomi_rs;
 extern crate rstest;
 
 use chrono::NaiveDate;
-use koyomi::prelude::*;
+use koyomi_rs::prelude::*;
 
 fn assert_calendar(jd: JapaneseDate, y: i32, m: u32, d: u32, w: &str, h: Option<&str>) {
     assert_eq!(y, jd.western_year());

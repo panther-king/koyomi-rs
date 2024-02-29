@@ -67,7 +67,7 @@ impl JapaneseHoliday {
     ///
     /// ```rust
     /// use chrono::NaiveDate;
-    /// use koyomi::JapaneseHoliday;
+    /// use koyomi_rs::JapaneseHoliday;
     ///
     /// let date = NaiveDate::from_ymd_opt(2024, 9, 22).unwrap();
     /// assert!(JapaneseHoliday::autumnal_equinox_day(&date).is_some());
@@ -85,7 +85,7 @@ impl JapaneseHoliday {
     ///
     /// ```rust
     /// use chrono::NaiveDate;
-    /// use koyomi::JapaneseHoliday;
+    /// use koyomi_rs::JapaneseHoliday;
     ///
     /// let date = NaiveDate::from_ymd_opt(2024, 5, 5).unwrap();
     /// assert!(JapaneseHoliday::childrens_day(&date).is_some());
@@ -103,7 +103,7 @@ impl JapaneseHoliday {
     ///
     /// ```rust
     /// use chrono::NaiveDate;
-    /// use koyomi::JapaneseHoliday;
+    /// use koyomi_rs::JapaneseHoliday;
     ///
     /// let date = NaiveDate::from_ymd_opt(2024, 1, 8).unwrap();
     /// assert!(JapaneseHoliday::coming_of_age_day(&date).is_some());
@@ -122,7 +122,7 @@ impl JapaneseHoliday {
     ///
     /// ```rust
     /// use chrono::NaiveDate;
-    /// use koyomi::JapaneseHoliday;
+    /// use koyomi_rs::JapaneseHoliday;
     ///
     /// let date = NaiveDate::from_ymd_opt(2024, 5, 3).unwrap();
     /// assert!(JapaneseHoliday::constitution_day(&date).is_some());
@@ -140,7 +140,7 @@ impl JapaneseHoliday {
     ///
     /// ```rust
     /// use chrono::NaiveDate;
-    /// use koyomi::JapaneseHoliday;
+    /// use koyomi_rs::JapaneseHoliday;
     ///
     /// let date = NaiveDate::from_ymd_opt(2024, 11, 3).unwrap();
     /// assert!(JapaneseHoliday::culture_day(&date).is_some());
@@ -158,7 +158,7 @@ impl JapaneseHoliday {
     ///
     /// ```rust
     /// use chrono::NaiveDate;
-    /// use koyomi::JapaneseHoliday;
+    /// use koyomi_rs::JapaneseHoliday;
     ///
     /// let date = NaiveDate::from_ymd_opt(2024, 2, 23).unwrap();
     /// assert!(JapaneseHoliday::emperors_birthday(&date).is_some());
@@ -178,7 +178,7 @@ impl JapaneseHoliday {
     ///
     /// ```rust
     /// use chrono::NaiveDate;
-    /// use koyomi::JapaneseHoliday;
+    /// use koyomi_rs::JapaneseHoliday;
     ///
     /// let date = NaiveDate::from_ymd_opt(2024, 5, 4).unwrap();
     /// assert!(JapaneseHoliday::green_day(&date).is_some());
@@ -197,7 +197,7 @@ impl JapaneseHoliday {
     ///
     /// ```rust
     /// use chrono::NaiveDate;
-    /// use koyomi::JapaneseHoliday;
+    /// use koyomi_rs::JapaneseHoliday;
     ///
     /// let date = NaiveDate::from_ymd_opt(2024, 1, 1).unwrap();
     /// assert!(JapaneseHoliday::holiday(&date).is_some());
@@ -213,7 +213,7 @@ impl JapaneseHoliday {
     ///
     /// ```rust
     /// use chrono::NaiveDate;
-    /// use koyomi::JapaneseHoliday;
+    /// use koyomi_rs::JapaneseHoliday;
     ///
     /// let date = NaiveDate::from_ymd_opt(2019, 5, 1).unwrap();
     /// assert!(JapaneseHoliday::imperial_ceremony_day(&date).is_some());
@@ -236,7 +236,7 @@ impl JapaneseHoliday {
     ///
     /// ```rust
     /// use chrono::NaiveDate;
-    /// use koyomi::JapaneseHoliday;
+    /// use koyomi_rs::JapaneseHoliday;
     ///
     /// let date = NaiveDate::from_ymd_opt(2024, 11, 23).unwrap();
     /// assert!(JapaneseHoliday::labor_thanksgiving_day(&date).is_some());
@@ -254,7 +254,7 @@ impl JapaneseHoliday {
     ///
     /// ```rust
     /// use chrono::NaiveDate;
-    /// use koyomi::JapaneseHoliday;
+    /// use koyomi_rs::JapaneseHoliday;
     ///
     /// let date = NaiveDate::from_ymd_opt(2024, 7, 15).unwrap();
     /// assert!(JapaneseHoliday::marine_day(&date).is_some());
@@ -275,7 +275,7 @@ impl JapaneseHoliday {
     ///
     /// ```rust
     /// use chrono::NaiveDate;
-    /// use koyomi::JapaneseHoliday;
+    /// use koyomi_rs::JapaneseHoliday;
     ///
     /// let date = NaiveDate::from_ymd_opt(2024, 8, 11).unwrap();
     /// assert!(JapaneseHoliday::mountain_day(&date).is_some());
@@ -294,7 +294,7 @@ impl JapaneseHoliday {
     /// # Example
     ///
     /// ```rust
-    /// use koyomi::JapaneseHoliday;
+    /// use koyomi_rs::JapaneseHoliday;
     ///
     /// let holiday = JapaneseHoliday::NewYearsDay;
     /// assert_eq!("元日", holiday.name());
@@ -334,7 +334,7 @@ impl JapaneseHoliday {
     ///
     /// ```rust
     /// use chrono::NaiveDate;
-    /// use koyomi::JapaneseHoliday;
+    /// use koyomi_rs::JapaneseHoliday;
     ///
     /// let date = NaiveDate::from_ymd_opt(2024, 2, 11).unwrap();
     /// assert!(JapaneseHoliday::national_foundation_day(&date).is_some());
@@ -352,7 +352,7 @@ impl JapaneseHoliday {
     ///
     /// ```rust
     /// use chrono::NaiveDate;
-    /// use koyomi::JapaneseHoliday;
+    /// use koyomi_rs::JapaneseHoliday;
     ///
     /// let date = NaiveDate::from_ymd_opt(2024, 1, 1).unwrap();
     /// assert!(JapaneseHoliday::new_years_day(&date).is_some());
@@ -370,7 +370,7 @@ impl JapaneseHoliday {
     ///
     /// ```rust
     /// use chrono::NaiveDate;
-    /// use koyomi::JapaneseHoliday;
+    /// use koyomi_rs::JapaneseHoliday;
     ///
     /// let date = NaiveDate::from_ymd_opt(2019, 10, 14).unwrap();
     /// assert!(JapaneseHoliday::physical_education_day(&date).is_some());
@@ -389,7 +389,7 @@ impl JapaneseHoliday {
     ///
     /// ```rust
     /// use chrono::NaiveDate;
-    /// use koyomi::JapaneseHoliday;
+    /// use koyomi_rs::JapaneseHoliday;
     ///
     /// let date = NaiveDate::from_ymd_opt(2024, 9, 16).unwrap();
     /// assert!(JapaneseHoliday::respect_for_the_age_day(&date).is_some());
@@ -408,7 +408,7 @@ impl JapaneseHoliday {
     ///
     /// ```rust
     /// use chrono::NaiveDate;
-    /// use koyomi::JapaneseHoliday;
+    /// use koyomi_rs::JapaneseHoliday;
     ///
     /// let date = NaiveDate::from_ymd_opt(2024, 4, 29).unwrap();
     /// assert!(JapaneseHoliday::showa_day(&date).is_some());
@@ -426,7 +426,7 @@ impl JapaneseHoliday {
     ///
     /// ```rust
     /// use chrono::NaiveDate;
-    /// use koyomi::JapaneseHoliday;
+    /// use koyomi_rs::JapaneseHoliday;
     ///
     /// let date = NaiveDate::from_ymd_opt(2024, 10, 14).unwrap();
     /// assert!(JapaneseHoliday::sports_day(&date).is_some());
@@ -446,7 +446,7 @@ impl JapaneseHoliday {
     ///
     /// ```rust
     /// use chrono::NaiveDate;
-    /// use koyomi::JapaneseHoliday;
+    /// use koyomi_rs::JapaneseHoliday;
     ///
     /// let date = NaiveDate::from_ymd_opt(2024, 2, 12).unwrap();
     /// assert!(JapaneseHoliday::substitute_holiday(&date).is_some());
@@ -474,7 +474,7 @@ impl JapaneseHoliday {
     ///
     /// ```rust
     /// use chrono::NaiveDate;
-    /// use koyomi::JapaneseHoliday;
+    /// use koyomi_rs::JapaneseHoliday;
     ///
     /// let date = NaiveDate::from_ymd_opt(2024, 3, 20).unwrap();
     /// assert!(JapaneseHoliday::vernal_equinox_day(&date).is_some());
@@ -542,7 +542,7 @@ impl JapaneseWeekday {
     ///
     /// ```rust
     /// use chrono::NaiveDate;
-    /// use koyomi::JapaneseWeekday;
+    /// use koyomi_rs::JapaneseWeekday;
     ///
     /// let date = NaiveDate::from_ymd_opt(2024, 1, 1).unwrap();
     /// assert_eq!(JapaneseWeekday::Getsu, JapaneseWeekday::from_datelike(&date));
@@ -557,7 +557,7 @@ impl JapaneseWeekday {
     /// # Example
     ///
     /// ```rust
-    /// use koyomi::JapaneseWeekday;
+    /// use koyomi_rs::JapaneseWeekday;
     ///
     /// assert!(JapaneseWeekday::from_name("金").is_some());
     /// ```
@@ -574,7 +574,7 @@ impl JapaneseWeekday {
     /// # Example
     ///
     /// ```rust
-    /// use koyomi::JapaneseWeekday;
+    /// use koyomi_rs::JapaneseWeekday;
     ///
     /// assert!(JapaneseWeekday::from_number(7).is_some());
     /// ```
@@ -596,7 +596,7 @@ impl JapaneseWeekday {
     /// # Example
     ///
     /// ```rust
-    /// use koyomi::JapaneseWeekday;
+    /// use koyomi_rs::JapaneseWeekday;
     ///
     /// assert_eq!("水", JapaneseWeekday::Sui.name());
     /// ```
@@ -610,7 +610,7 @@ impl JapaneseWeekday {
     /// # Example
     ///
     /// ```rust
-    /// use koyomi::JapaneseWeekday;
+    /// use koyomi_rs::JapaneseWeekday;
     ///
     /// assert_eq!(4, JapaneseWeekday::Moku.number());
     /// ```

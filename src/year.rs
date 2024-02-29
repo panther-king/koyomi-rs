@@ -42,7 +42,7 @@ impl HeavenlyStem {
     ///
     /// ```rust
     /// use chrono::NaiveDate;
-    /// use koyomi::HeavenlyStem;
+    /// use koyomi_rs::HeavenlyStem;
     ///
     /// let date = NaiveDate::from_ymd_opt(2024, 1, 1).unwrap();
     /// assert_eq!(HeavenlyStem::Kinoe, HeavenlyStem::from_datelike(&date));
@@ -62,7 +62,7 @@ impl HeavenlyStem {
     /// # Example
     ///
     /// ```rust
-    /// use koyomi::HeavenlyStem;
+    /// use koyomi_rs::HeavenlyStem;
     ///
     /// assert!(HeavenlyStem::from_name("甲").is_some());
     /// ```
@@ -79,7 +79,7 @@ impl HeavenlyStem {
     /// # Example
     ///
     /// ```rust
-    /// use koyomi::HeavenlyStem;
+    /// use koyomi_rs::HeavenlyStem;
     ///
     /// assert!(HeavenlyStem::from_number(1).is_some());
     /// ```
@@ -104,7 +104,7 @@ impl HeavenlyStem {
     /// # Example
     ///
     /// ```rust
-    /// use koyomi::HeavenlyStem;
+    /// use koyomi_rs::HeavenlyStem;
     ///
     /// assert_eq!("甲", HeavenlyStem::Kinoe.name());
     /// ```
@@ -117,7 +117,7 @@ impl HeavenlyStem {
     /// # Example
     ///
     /// ```rust
-    /// use koyomi::HeavenlyStem;
+    /// use koyomi_rs::HeavenlyStem;
     ///
     /// assert_eq!(10, HeavenlyStem::Mizunoto.to_number());
     /// ```
@@ -178,7 +178,7 @@ impl JapaneseZodiac {
     ///
     /// ```rust
     /// use chrono::NaiveDate;
-    /// use koyomi::JapaneseZodiac;
+    /// use koyomi_rs::JapaneseZodiac;
     ///
     /// let date = NaiveDate::from_ymd_opt(2024, 1, 1).unwrap();
     /// assert_eq!(JapaneseZodiac::Tatsu, JapaneseZodiac::from_datelike(&date));
@@ -198,7 +198,7 @@ impl JapaneseZodiac {
     /// # Example
     ///
     /// ```rust
-    /// use koyomi::JapaneseZodiac;
+    /// use koyomi_rs::JapaneseZodiac;
     ///
     /// assert!(JapaneseZodiac::from_name("寅").is_some());
     /// ```
@@ -215,7 +215,7 @@ impl JapaneseZodiac {
     /// # Example
     ///
     /// ```rust
-    /// use koyomi::JapaneseZodiac;
+    /// use koyomi_rs::JapaneseZodiac;
     ///
     /// assert!(JapaneseZodiac::from_number(1).is_some());
     /// ```
@@ -242,7 +242,7 @@ impl JapaneseZodiac {
     /// # Example
     ///
     /// ```rust
-    /// use koyomi::JapaneseZodiac;
+    /// use koyomi_rs::JapaneseZodiac;
     ///
     /// assert_eq!("丑", JapaneseZodiac::Ushi.name());
     /// ```
@@ -256,7 +256,7 @@ impl JapaneseZodiac {
     /// # Example
     ///
     /// ```rust
-    /// use koyomi::JapaneseZodiac;
+    /// use koyomi_rs::JapaneseZodiac;
     ///
     /// assert_eq!(12, JapaneseZodiac::Yi.number());
     /// ```
@@ -415,7 +415,7 @@ impl SexagenaryCycle {
     ///
     /// ```rust
     /// use chrono::NaiveDate;
-    /// use koyomi::SexagenaryCycle;
+    /// use koyomi_rs::SexagenaryCycle;
     ///
     /// let date = NaiveDate::from_ymd_opt(2024, 1, 1).unwrap();
     /// assert_eq!(SexagenaryCycle::KinoeTatsu, SexagenaryCycle::from_datelike(&date));
@@ -433,7 +433,7 @@ impl SexagenaryCycle {
     /// # Example
     ///
     /// ```rust
-    /// use koyomi::SexagenaryCycle;
+    /// use koyomi_rs::SexagenaryCycle;
     ///
     /// assert!(SexagenaryCycle::from_name("丙午").is_some());
     /// ```
@@ -449,7 +449,7 @@ impl SexagenaryCycle {
     /// # Example
     ///
     /// ```rust
-    /// use koyomi::SexagenaryCycle;
+    /// use koyomi_rs::SexagenaryCycle;
     ///
     /// assert_eq!("戊辰", SexagenaryCycle::TsuchinoeTatsu.name());
     /// ```

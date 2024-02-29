@@ -32,7 +32,7 @@ impl JapaneseDate {
     ///
     /// ```rust
     /// use chrono::NaiveDate;
-    /// use koyomi::JapaneseDate;
+    /// use koyomi_rs::JapaneseDate;
     ///
     /// let chrono_date = NaiveDate::from_ymd_opt(2024, 1, 1).unwrap();
     /// let japanese_date = JapaneseDate::from_datelike(&chrono_date);
@@ -60,7 +60,7 @@ impl JapaneseDate {
     ///
     /// ```rust
     /// use chrono::NaiveDate;
-    /// use koyomi::JapaneseDate;
+    /// use koyomi_rs::JapaneseDate;
     ///
     /// let chrono_date = NaiveDate::from_ymd_opt(2024, 2, 29).unwrap();
     /// let japanese_date = JapaneseDate::from_datelike(&chrono_date);
@@ -78,7 +78,7 @@ impl JapaneseDate {
     ///
     /// ```rust
     /// use chrono::NaiveDate;
-    /// use koyomi::{JapaneseDate, JapaneseEra};
+    /// use koyomi_rs::{JapaneseDate, JapaneseEra};
     ///
     /// let chrono_date = NaiveDate::from_ymd_opt(2024, 1, 1).unwrap();
     /// let japanese_date = JapaneseDate::from_datelike(&chrono_date);
@@ -95,7 +95,7 @@ impl JapaneseDate {
     ///
     /// ```rust
     /// use chrono::NaiveDate;
-    /// use koyomi::JapaneseDate;
+    /// use koyomi_rs::JapaneseDate;
     ///
     /// let chrono_date = NaiveDate::from_ymd_opt(2024, 2, 23).unwrap();
     /// let japanese_date = JapaneseDate::from_datelike(&chrono_date);
@@ -114,7 +114,7 @@ impl JapaneseDate {
     ///
     /// ```rust
     /// use chrono::NaiveDate;
-    /// use koyomi::JapaneseDate;
+    /// use koyomi_rs::JapaneseDate;
     ///
     /// let chrono_date = NaiveDate::from_ymd_opt(2024, 1, 1).unwrap();
     /// let japanese_date = JapaneseDate::from_datelike(&chrono_date);
@@ -131,7 +131,7 @@ impl JapaneseDate {
     ///
     /// ```rust
     /// use chrono::NaiveDate;
-    /// use koyomi::{JapaneseDate, HeavenlyStem};
+    /// use koyomi_rs::{JapaneseDate, HeavenlyStem};
     ///
     /// let chrono_date = NaiveDate::from_ymd_opt(2024, 1, 1).unwrap();
     /// let japanese_date = JapaneseDate::from_datelike(&chrono_date);
@@ -148,7 +148,7 @@ impl JapaneseDate {
     ///
     /// ```rust
     /// use chrono::NaiveDate;
-    /// use koyomi::JapaneseDate;
+    /// use koyomi_rs::JapaneseDate;
     ///
     /// let chrono_date = NaiveDate::from_ymd_opt(2024, 1, 1).unwrap();
     /// let japanese_date = JapaneseDate::from_datelike(&chrono_date);
@@ -165,7 +165,7 @@ impl JapaneseDate {
     ///
     /// ```rust
     /// use chrono::NaiveDate;
-    /// use koyomi::{JapaneseDate, JapaneseHoliday};
+    /// use koyomi_rs::{JapaneseDate, JapaneseHoliday};
     ///
     /// let chrono_date = NaiveDate::from_ymd_opt(2024, 1, 1).unwrap();
     /// let japanese_date = JapaneseDate::from_datelike(&chrono_date);
@@ -182,7 +182,7 @@ impl JapaneseDate {
     ///
     /// ```rust
     /// use chrono::NaiveDate;
-    /// use koyomi::JapaneseDate;
+    /// use koyomi_rs::JapaneseDate;
     ///
     /// let chrono_date = NaiveDate::from_ymd_opt(2024, 1, 1).unwrap();
     /// let japanese_date = JapaneseDate::from_datelike(&chrono_date);
@@ -199,7 +199,7 @@ impl JapaneseDate {
     ///
     /// ```rust
     /// use chrono::NaiveDate;
-    /// use koyomi::{JapaneseDate, JapaneseMonth};
+    /// use koyomi_rs::{JapaneseDate, JapaneseMonth};
     ///
     /// let chrono_date = NaiveDate::from_ymd_opt(2024, 2, 1).unwrap();
     /// let japanese_date = JapaneseDate::from_datelike(&chrono_date);
@@ -216,7 +216,7 @@ impl JapaneseDate {
     ///
     /// ```rust
     /// use chrono::NaiveDate;
-    /// use koyomi::JapaneseDate;
+    /// use koyomi_rs::JapaneseDate;
     ///
     /// let chrono_date = NaiveDate::from_ymd_opt(2024, 2, 1).unwrap();
     /// let japanese_date = JapaneseDate::from_datelike(&chrono_date);
@@ -233,7 +233,7 @@ impl JapaneseDate {
     ///
     /// ```rust
     /// use chrono::NaiveDate;
-    /// use koyomi::JapaneseDate;
+    /// use koyomi_rs::JapaneseDate;
     ///
     /// let chrono_date = NaiveDate::from_ymd_opt(2024, 2, 1).unwrap();
     /// let japanese_date = JapaneseDate::from_datelike(&chrono_date);
@@ -250,7 +250,7 @@ impl JapaneseDate {
     ///
     /// ```rust
     /// use chrono::NaiveDate;
-    /// use koyomi::{JapaneseDate, SexagenaryCycle};
+    /// use koyomi_rs::{JapaneseDate, SexagenaryCycle};
     ///
     /// let chrono_date = NaiveDate::from_ymd_opt(2024, 1, 1).unwrap();
     /// let japanese_date = JapaneseDate::from_datelike(&chrono_date);
@@ -267,7 +267,7 @@ impl JapaneseDate {
     ///
     /// ```rust
     /// use chrono::NaiveDate;
-    /// use koyomi::JapaneseDate;
+    /// use koyomi_rs::JapaneseDate;
     ///
     /// let chrono_date = NaiveDate::from_ymd_opt(2024, 1, 1).unwrap();
     /// let japanese_date = JapaneseDate::from_datelike(&chrono_date);
@@ -284,7 +284,7 @@ impl JapaneseDate {
     ///
     /// ```rust
     /// use chrono::NaiveDate;
-    /// use koyomi::{JapaneseDate, JapaneseWeekday};
+    /// use koyomi_rs::{JapaneseDate, JapaneseWeekday};
     ///
     /// let chrono_date = NaiveDate::from_ymd_opt(2024, 12, 31).unwrap(); // Tue
     /// let japanese_date = JapaneseDate::from_datelike(&chrono_date);
@@ -301,7 +301,7 @@ impl JapaneseDate {
     ///
     /// ```rust
     /// use chrono::NaiveDate;
-    /// use koyomi::JapaneseDate;
+    /// use koyomi_rs::JapaneseDate;
     ///
     /// let chrono_date = NaiveDate::from_ymd_opt(2024, 1, 1).unwrap(); // Mon
     /// let japanese_date = JapaneseDate::from_datelike(&chrono_date);
@@ -318,7 +318,7 @@ impl JapaneseDate {
     ///
     /// ```rust
     /// use chrono::NaiveDate;
-    /// use koyomi::JapaneseDate;
+    /// use koyomi_rs::JapaneseDate;
     ///
     /// let chrono_date = NaiveDate::from_ymd_opt(2024, 1, 1).unwrap();
     /// let japanese_date = JapaneseDate::from_datelike(&chrono_date);
@@ -335,7 +335,7 @@ impl JapaneseDate {
     ///
     /// ```
     /// use chrono::NaiveDate;
-    /// use koyomi::{JapaneseDate, JapaneseZodiac};
+    /// use koyomi_rs::{JapaneseDate, JapaneseZodiac};
     ///
     /// let chrono_date = NaiveDate::from_ymd_opt(2024, 1, 1).unwrap();
     /// let japanese_date = JapaneseDate::from_datelike(&chrono_date);
@@ -352,7 +352,7 @@ impl JapaneseDate {
     ///
     /// ```
     /// use chrono::NaiveDate;
-    /// use koyomi::JapaneseDate;
+    /// use koyomi_rs::JapaneseDate;
     ///
     /// let chrono_date = NaiveDate::from_ymd_opt(2024, 1, 1).unwrap();
     /// let japanese_date = JapaneseDate::from_datelike(&chrono_date);
@@ -380,7 +380,7 @@ impl Koyomi {
     ///
     /// ```rust
     /// use chrono::NaiveDate;
-    /// use koyomi::Koyomi;
+    /// use koyomi_rs::Koyomi;
     ///
     /// let from = NaiveDate::from_ymd_opt(2024, 1, 1).unwrap();
     /// let until = NaiveDate::from_ymd_opt(2024, 12, 31).unwrap();
@@ -402,7 +402,7 @@ impl Koyomi {
     ///
     /// ```rust
     /// use chrono::NaiveDate;
-    /// use koyomi::Koyomi;
+    /// use koyomi_rs::Koyomi;
     ///
     /// let current = NaiveDate::from_ymd_opt(2024, 2, 10).unwrap();
     /// let koyomi = Koyomi::current_month(&current);
@@ -420,7 +420,7 @@ impl Koyomi {
     ///
     /// ```rust
     /// use chrono::NaiveDate;
-    /// use koyomi::Koyomi;
+    /// use koyomi_rs::Koyomi;
     ///
     /// let current = NaiveDate::from_ymd_opt(2024, 12, 31).unwrap();
     /// let koyomi = Koyomi::current_year(&current);
@@ -439,7 +439,7 @@ impl Koyomi {
     ///
     /// ```rust
     /// use chrono::{Days, Local, NaiveDate};
-    /// use koyomi::Koyomi;
+    /// use koyomi_rs::Koyomi;
     ///
     /// let until = Local::now().checked_add_days(Days::new(10)).unwrap();
     /// let koyomi = Koyomi::from_now_until(&until);
@@ -459,7 +459,7 @@ impl Koyomi {
     /// # Example
     ///
     /// ```rust
-    /// use koyomi::Koyomi;
+    /// use koyomi_rs::Koyomi;
     ///
     /// assert!(Koyomi::month_of(2024, 1).is_some());
     /// assert!(Koyomi::month_of(2024, 13).is_none());
@@ -481,7 +481,7 @@ impl Koyomi {
     ///
     /// ```rust
     /// use chrono::{Days, Local, NaiveDate};
-    /// use koyomi::Koyomi;
+    /// use koyomi_rs::Koyomi;
     ///
     /// let from = Local::now().checked_sub_days(Days::new(10)).unwrap();
     /// let koyomi = Koyomi::until_now_from(&from);
@@ -501,7 +501,7 @@ impl Koyomi {
     /// # Example
     ///
     /// ```rust
-    /// use koyomi::Koyomi;
+    /// use koyomi_rs::Koyomi;
     ///
     /// // 2024 is leap year.
     /// assert_eq!(366, Koyomi::year_of(2024).count());

@@ -44,7 +44,7 @@ impl JapaneseMonth {
     ///
     /// ```rust
     /// use chrono::NaiveDate;
-    /// use koyomi::JapaneseMonth;
+    /// use koyomi_rs::JapaneseMonth;
     ///
     /// let date = NaiveDate::from_ymd_opt(2024, 1, 1).unwrap();
     /// assert_eq!(JapaneseMonth::Mutsuki, JapaneseMonth::from_datelike(&date));
@@ -64,7 +64,7 @@ impl JapaneseMonth {
     /// # Example
     ///
     /// ```rust
-    /// use koyomi::JapaneseMonth;
+    /// use koyomi_rs::JapaneseMonth;
     ///
     /// assert!(JapaneseMonth::from_name("師走").is_some());
     /// ```
@@ -80,7 +80,7 @@ impl JapaneseMonth {
     /// # Example
     ///
     /// ```rust
-    /// use koyomi::JapaneseMonth;
+    /// use koyomi_rs::JapaneseMonth;
     ///
     /// assert!(JapaneseMonth::from_number(1).is_some());
     /// ```
@@ -107,7 +107,7 @@ impl JapaneseMonth {
     /// # Example
     ///
     /// ```rust
-    /// use koyomi::JapaneseMonth;
+    /// use koyomi_rs::JapaneseMonth;
     ///
     /// assert_eq!("弥生", JapaneseMonth::Yayoi.name());
     /// ```
@@ -120,7 +120,7 @@ impl JapaneseMonth {
     /// # Example
     ///
     /// ```rust
-    /// use koyomi::JapaneseMonth;
+    /// use koyomi_rs::JapaneseMonth;
     ///
     /// assert_eq!(10, JapaneseMonth::Kannazuki.number());
     /// ```

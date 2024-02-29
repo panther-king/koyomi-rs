@@ -31,7 +31,7 @@ impl JapaneseEra {
     ///
     /// ```rust
     /// use chrono::NaiveDate;
-    /// use koyomi::JapaneseEra;
+    /// use koyomi_rs::JapaneseEra;
     ///
     /// let date = NaiveDate::from_ymd_opt(2024, 1, 1).unwrap();
     /// assert_eq!(JapaneseEra::Reiwa(6), JapaneseEra::from_datelike(&date).unwrap());
@@ -56,7 +56,7 @@ impl JapaneseEra {
     /// # Example
     ///
     /// ```rust
-    /// use koyomi::JapaneseEra;
+    /// use koyomi_rs::JapaneseEra;
     ///
     /// assert_eq!("令和", JapaneseEra::Reiwa(1).name());
     /// ```
