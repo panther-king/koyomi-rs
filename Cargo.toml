@@ -1,6 +1,12 @@
 [package]
 name = "koyomi-rs"
 version = "0.1.0"
+authors = ["panther-king"]
+description = "Japanese calendar written in Rust"
+repository = "https://github.com/panther-king/koyomi-rs"
+license-file = "LICENSE"
+readme = "README.md"
+keywords = ["Japanese", "calendar"]
 edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
