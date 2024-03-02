@@ -1,5 +1,7 @@
 # koyomi-rs
 
+[![CI](https://github.com/panther-king/koyomi-rs/actions/workflows/ci.yml/badge.svg)](https://github.com/panther-king/koyomi-rs/actions/workflows/ci.yml/badge.svg) [![version](https://img.shields.io/crates/v/koyomi-rs.svg)](https://crates.io/crates/koyomi-rs) [![downloads](https://img.shields.io/crates/d/koyomi-rs.svg)](https://crates.io/crates/koyomi-rs) [![license](http://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/panther-king/koyomi-rs/blob/master/LICENSE)
+
 `koyomi-rs` is a calendar utility for Japan that depends [chrono](https://crates.io/crates/chrono) crate.
 
 # About
