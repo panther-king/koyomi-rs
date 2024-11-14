@@ -870,7 +870,7 @@ mod green_days_tests {
 }
 
 #[cfg(test)]
-mod showa_days_tests {
+mod showa_day_tests {
     use super::JapaneseHoliday;
     use super::JapaneseHoliday::*;
     use chrono::NaiveDate;
@@ -936,7 +936,7 @@ mod childrens_day_tests {
 }
 
 #[cfg(test)]
-mod marin_day_tests {
+mod marine_day_tests {
     use super::JapaneseHoliday;
     use super::JapaneseHoliday::*;
     use chrono::NaiveDate;
