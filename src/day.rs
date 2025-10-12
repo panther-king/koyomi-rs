@@ -729,7 +729,7 @@ mod tests_national_foundation_day {
     use rstest::*;
 
     #[rstest]
-    fn 祝日法の改正後は2月15日が建国記念の日である() {
+    fn 祝日法の改正後は2月11日が建国記念の日である() {
         let date = NaiveDate::from_ymd_opt(1967, 2, 11).unwrap();
         assert_eq!(
             Some(NationalFoundationDay),
@@ -738,8 +738,8 @@ mod tests_national_foundation_day {
     }
 
     #[rstest]
-    fn 祝日法の改正以前は2月15日であっても建国記念の日ではない() {
-        let date = NaiveDate::from_ymd_opt(1966, 2, 15).unwrap();
+    fn 祝日法の改正以前は2月11日であっても建国記念の日ではない() {
+        let date = NaiveDate::from_ymd_opt(1966, 2, 11).unwrap();
         assert_ne!(
             Some(NationalFoundationDay),
             JapaneseHoliday::national_foundation_day(&date)
@@ -870,7 +870,7 @@ mod green_days_tests {
 }
 
 #[cfg(test)]
-mod showa_days_tests {
+mod showa_day_tests {
     use super::JapaneseHoliday;
     use super::JapaneseHoliday::*;
     use chrono::NaiveDate;
@@ -936,7 +936,7 @@ mod childrens_day_tests {
 }
 
 #[cfg(test)]
-mod marin_day_tests {
+mod marine_day_tests {
     use super::JapaneseHoliday;
     use super::JapaneseHoliday::*;
     use chrono::NaiveDate;
