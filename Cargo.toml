@@ -15,4 +15,4 @@ edition = "2021"
 chrono = "0.4.23"
 
 [dev-dependencies]
-rstest = "0.16.0"
+rstest = "0.26.1"
