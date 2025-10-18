@@ -1,6 +1,6 @@
 [package]
 name = "koyomi-rs"
-version = "0.2.0"
+version = "0.3.0"
 authors = ["panther-king"]
 description = "Japanese calendar written in Rust"
 repository = "https://github.com/panther-king/koyomi-rs"
