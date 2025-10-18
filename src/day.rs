@@ -14,6 +14,8 @@ pub enum JapaneseHoliday {
     AutumnalEquinoxDay,
     /// こどもの日
     ChildrensDay,
+    /// 国民の休日
+    CitizensHoliday,
     /// 成人の日
     ComingOfAgeDay,
     /// 憲法記念日
@@ -94,6 +96,38 @@ impl JapaneseHoliday {
         match (date.year(), date.month(), date.day()) {
             (1948.., 5, 5) => Some(ChildrensDay),
             _ => None,
+        }
+    }
+
+    /// [国民の休日](https://ja.wikipedia.org/wiki/国民の休日)
+    ///
+    /// # Example
+    ///
+    /// ```rust
+    /// use chrono::NaiveDate;
+    /// use koyomi_rs::JapaneseHoliday;
+    ///
+    /// let date = NaiveDate::from_ymd_opt(2026, 9, 22).unwrap();
+    /// assert!(JapaneseHoliday::citizens_holiday(&date).is_some());
+    /// ```
+    pub fn citizens_holiday<T: Datelike>(date: &T) -> Option<Self> {
+        let enforced = NaiveDate::from_ymd_opt(1985, 12, 27).unwrap();
+        let today = NaiveDate::from_ymd_opt(date.year(), date.month(), date.day()).unwrap();
+
+        if today < enforced {
+            None
+        } else {
+            let yesterday = today
+                .pred_opt()
+                .and_then(|y| JapaneseHoliday::holiday_without_substitute(&y));
+            let tomorrow = today
+                .succ_opt()
+                .and_then(|t| JapaneseHoliday::holiday_without_substitute(&t));
+            if yesterday.is_some() && tomorrow.is_some() {
+                Some(CitizensHoliday)
+            } else {
+                None
+            }
         }
     }
 
@@ -205,6 +239,7 @@ impl JapaneseHoliday {
     pub fn holiday<T: Datelike>(date: &T) -> Option<Self> {
         JapaneseHoliday::holiday_without_substitute(date)
             .or(JapaneseHoliday::substitute_holiday(date))
+            .or(JapaneseHoliday::citizens_holiday(date))
     }
 
     /// [皇室慶弔行事に伴う休日](https://ja.wikipedia.org/wiki/皇室慶弔行事に伴う休日)
@@ -303,6 +338,7 @@ impl JapaneseHoliday {
         match self {
             AutumnalEquinoxDay => "秋分の日",
             ChildrensDay => "こどもの日",
+            CitizensHoliday => "国民の休日",
             ComingOfAgeDay => "成人の日",
             ConstitutionDay => "憲法記念日",
             CultureDay => "文化の日",
@@ -1304,6 +1340,32 @@ mod substitute_holiday_tests {
         assert_ne!(
             Some(SubstituteDay),
             JapaneseHoliday::substitute_holiday(&date)
+        );
+    }
+}
+
+#[cfg(test)]
+mod citizens_holiday_tests {
+    use super::JapaneseHoliday;
+    use super::JapaneseHoliday::*;
+    use chrono::NaiveDate;
+    use rstest::*;
+
+    #[rstest]
+    fn 祝日に挟まれた平日は国民の休日である() {
+        let date = NaiveDate::from_ymd_opt(1988, 5, 4).unwrap();
+        assert_eq!(
+            Some(CitizensHoliday),
+            JapaneseHoliday::citizens_holiday(&date)
+        );
+    }
+
+    #[rstest]
+    fn 祝日法の改正前は祝日に挟まれた平日でも国民の休日ではない() {
+        let date = NaiveDate::from_ymd_opt(1984, 5, 4).unwrap();
+        assert_ne!(
+            Some(CitizensHoliday),
+            JapaneseHoliday::citizens_holiday(&date)
         );
     }
 }
